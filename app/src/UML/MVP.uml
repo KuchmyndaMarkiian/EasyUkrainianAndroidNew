@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1437.8662037037038" y="11.0">MVP.Presenters.IRedirectablePresenter</node>
+    <node x="206.03981481481492" y="518.0">MVP.Presenters.RegisterPresenter</node>
+    <node x="1418.425" y="562.5">MVP.Presenters.VocabularyTaskPresenter</node>
+    <node x="645.0398148148149" y="628.5">MVP.Presenters.LoginPresenter</node>
+    <node x="1049.625" y="562.0">MVP.Presenters.ProfilePresenter</node>
+    <node x="817.9912037037037" y="306.0">MVP.Views.IProfileView</node>
+    <node x="0.0" y="239.5">Models.AutorizationModels.Abstract.EditingModel</node>
+    <node x="482.1995370370371" y="216.5">MVP.Presenters.AutorizationPresenter</node>
+    <node x="949.9912037037037" y="228.5">MVP.Presenters.CardsPresenter</node>
+    <node x="129.5120370370371" y="0.0">Models.AutorizationModels.Abstract.UserModel</node>
+    <node x="1212.9912037037038" y="184.0">MVP.Presenters.TaskPresenter</node>
+    <node x="640.3782407407407" y="0.0">MVP.Views.IView</node>
+    <node x="967.8782407407407" y="11.0">MVP.Presenters.IPresenter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="MVP.Presenters.ProfilePresenter" target="MVP.Views.IProfileView">
+      <point x="-106.66666666666674" y="-115.5" />
+      <point x="1102.9583333333333" y="478.0" />
+      <point x="873.9912037037037" y="478.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="MVP.Presenters.TaskPresenter" target="MVP.Views.IView">
+      <point x="-130.0" y="-137.0" />
+      <point x="1277.9912037037038" y="104.0" />
+      <point x="801.4782407407408" y="104.0" />
+      <point x="71.60000000000002" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.RegisterPresenter" target="MVP.Presenters.IRedirectablePresenter">
+      <point x="157.125" y="-159.5" />
+      <point x="572.6648148148149" y="488.0" />
+      <point x="1678.1662037037036" y="488.0" />
+      <point x="1678.1662037037036" y="164.0" />
+      <point x="1617.3662037037038" y="164.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.VocabularyTaskPresenter" target="MVP.Presenters.IRedirectablePresenter">
+      <point x="108.25" y="-115.0" />
+      <point x="1743.175" y="498.0" />
+      <point x="1748.675" y="498.0" />
+      <point x="1748.675" y="164.0" />
+      <point x="1760.9662037037037" y="164.0" />
+      <point x="143.5999999999999" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.CardsPresenter" target="MVP.Presenters.IPresenter">
+      <point x="60.5" y="-92.5" />
+      <point x="1131.4912037037038" y="124.0" />
+      <point x="1009.1282407407407" y="124.0" />
+      <point x="-13.75" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.TaskPresenter" target="MVP.Presenters.IRedirectablePresenter">
+      <point x="130.0" y="-137.0" />
+      <point x="1537.9912037037038" y="164.0" />
+      <point x="1545.5662037037036" y="164.0" />
+      <point x="-71.79999999999995" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.LoginPresenter" target="MVP.Presenters.AutorizationPresenter">
+      <point x="0.0" y="-49.0" />
+      <point x="745.5398148148149" y="478.0" />
+      <point x="710.9495370370371" y="478.0" />
+      <point x="76.25" y="104.5" />
+    </edge>
+    <edge source="MVP.Presenters.AutorizationPresenter" target="MVP.Presenters.IPresenter">
+      <point x="38.125" y="-104.5" />
+      <point x="672.8245370370371" y="154.0" />
+      <point x="981.6282407407407" y="154.0" />
+      <point x="-41.25" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.ProfilePresenter" target="MVP.Presenters.IRedirectablePresenter">
+      <point x="106.66666666666674" y="-115.5" />
+      <point x="1316.2916666666667" y="498.0" />
+      <point x="1737.675" y="498.0" />
+      <point x="1737.675" y="164.0" />
+      <point x="1689.1662037037036" y="164.0" />
+      <point x="71.79999999999995" y="26.0" />
+    </edge>
+    <edge source="MVP.Views.IProfileView" target="MVP.Views.IView">
+      <point x="0.0" y="-15.0" />
+      <point x="873.9912037037037" y="144.0" />
+      <point x="729.8782407407407" y="144.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.AutorizationPresenter" target="Models.AutorizationModels.Abstract.UserModel">
+      <point x="-114.375" y="-104.5" />
+      <point x="520.3245370370371" y="124.0" />
+      <point x="248.7620370370371" y="124.0" />
+      <point x="39.75" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.CardsPresenter" target="MVP.Views.IView">
+      <point x="-60.5" y="-92.5" />
+      <point x="1010.4912037037037" y="134.0" />
+      <point x="765.6782407407406" y="134.0" />
+      <point x="35.799999999999955" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.AutorizationPresenter" target="MVP.Views.IView">
+      <point x="-38.125" y="-104.5" />
+      <point x="596.5745370370371" y="144.0" />
+      <point x="694.0782407407407" y="144.0" />
+      <point x="-35.799999999999955" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.RegisterPresenter" target="MVP.Views.IView">
+      <point x="-52.375" y="-159.5" />
+      <point x="363.1648148148149" y="498.0" />
+      <point x="346.5" y="498.0" />
+      <point x="346.5" y="134.0" />
+      <point x="658.2782407407408" y="134.0" />
+      <point x="-71.60000000000002" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.ProfilePresenter" target="MVP.Presenters.IPresenter">
+      <point x="0.0" y="-115.5" />
+      <point x="1209.625" y="478.0" />
+      <point x="1202.4912037037038" y="478.0" />
+      <point x="1202.4912037037038" y="114.0" />
+      <point x="1036.6282407407407" y="114.0" />
+      <point x="13.75" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.TaskPresenter" target="MVP.Presenters.IPresenter">
+      <point x="0.0" y="-137.0" />
+      <point x="1407.9912037037038" y="94.0" />
+      <point x="1064.1282407407407" y="94.0" />
+      <point x="41.25" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.VocabularyTaskPresenter" target="MVP.Presenters.TaskPresenter">
+      <point x="-108.25" y="-115.0" />
+      <point x="1526.675" y="478.0" />
+      <point x="1407.9912037037038" y="478.0" />
+      <point x="0.0" y="137.0" />
+    </edge>
+    <edge source="MVP.Presenters.AutorizationPresenter" target="MVP.Presenters.IRedirectablePresenter">
+      <point x="114.375" y="-104.5" />
+      <point x="749.0745370370371" y="164.0" />
+      <point x="1473.766203703704" y="164.0" />
+      <point x="-143.5999999999999" y="26.0" />
+    </edge>
+    <edge source="MVP.Presenters.RegisterPresenter" target="Models.AutorizationModels.Abstract.EditingModel">
+      <point x="-157.125" y="-159.5" />
+      <point x="258.4148148148149" y="498.0" />
+      <point x="168.0" y="498.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="Models.AutorizationModels.Abstract.EditingModel" target="Models.AutorizationModels.Abstract.UserModel">
+      <point x="0.0" y="-81.5" />
+      <point x="168.0" y="164.0" />
+      <point x="169.2620370370371" y="164.0" />
+      <point x="-39.75" y="37.0" />
+    </edge>
+    <edge source="MVP.Presenters.RegisterPresenter" target="MVP.Presenters.AutorizationPresenter">
+      <point x="52.375" y="-159.5" />
+      <point x="467.9148148148149" y="498.0" />
+      <point x="558.4495370370371" y="498.0" />
+      <point x="-76.25" y="104.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="926.0" y="418.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

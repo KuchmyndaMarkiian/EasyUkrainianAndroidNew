@@ -1,0 +1,99 @@
+package MVP.Presenters;
+
+import Hardware.SharedPreferences.UserPreference;
+import Infrastructure.AccountSessions.CurrentUser;
+import Infrastructure.AccountSessions.User;
+import Infrastructure.Static.EasyUkrApplication;
+import Infrastructure.Tasks.Sessions.ITaskSession;
+import MVP.Views.IProfileView;
+import MVP.Views.IView;
+import android.app.Activity;
+import android.support.design.widget.NavigationView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.example.mark0.easyukrainian.ProfileNewActivity;
+import com.example.mark0.easyukrainian.R;
+
+import java.io.Serializable;
+import java.util.Map;
+
+import static Infrastructure.Static.EasyUkrApplication.redirectToIntent;
+import static Infrastructure.Static.EasyUkrApplication.showToast;
+
+/**
+ * Created by mark0 on 28.04.2017.
+ */
+public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
+    IProfileView view;
+    NavigationView navigationView;
+    ITaskSession session;
+    Activity activity;
+
+    public ProfilePresenter(ITaskSession session) {
+        this.session = session;
+    }
+
+    public void init() {
+        if (session != null) {
+            int result = session.getResult();
+            CurrentUser.getInstance().setScore(result);
+            showToast(activity, session.getResultMessage());
+
+            (new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+                    //Todo: need fix token losting
+                    UserPreference.storeUserAccount(CurrentUser.getInstance());
+                    CurrentUser.updateInfoToServer(getView().getCurrentContext().getBaseContext());
+                    CurrentUser.getInstance().cloneFromMemory(UserPreference.readUserAccount());
+                    CurrentUser.updateInfoFromServer(getView().getCurrentContext().getBaseContext());
+                }
+            }).start();
+        }
+        navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(view);
+
+    }
+    private void presentModel()
+    {
+        User user= CurrentUser.getInstance();
+        TextView text = ((TextView) activity.findViewById(R.id.userHeader));
+        String fullName = user.getName() + " " + user.getSurname();
+        text.setText(fullName);
+        text = ((TextView) activity.findViewById(R.id.userScoreHeader));
+        String score=""+user.getScore();
+        text.setText(score);
+        ImageView imageView = ((ImageView) activity.findViewById(R.id.userAvatar));
+        imageView.setImageBitmap(EasyUkrApplication.getBitmap(user.getAvatar()));
+
+        View navView = navigationView.getHeaderView(0);
+        text = (TextView) navView.findViewById(R.id.userDrawerText);
+        text.setText(fullName);
+        text = (TextView) navView.findViewById(R.id.mailDrawerText);
+        text.setText(user.getEmail());
+        imageView = (ImageView) navView.findViewById(R.id.imageDrawerAvatar);
+        imageView.setImageBitmap(EasyUkrApplication.getBitmap(user.getAvatar()));
+    }
+
+    @Override
+    public void redirectView(Class<?> aClass, Map<String, Serializable> extras) {
+        redirectToIntent(view.getCurrentContext(), aClass, false, extras);
+    }
+
+    @Override
+    public IView getView() {
+        return view;
+    }
+
+    @Override
+    public void setView(IView view) {
+        this.view = (ProfileNewActivity) view;
+        activity = this.view.getCurrentContext();
+        init();
+        presentModel();
+    }
+
+
+}

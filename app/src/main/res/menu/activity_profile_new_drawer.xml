@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_vocabulary"
+                android:icon="@drawable/vocabulary"
+                android:title="Vocabulary"/>
+        <item
+                android:id="@+id/nav_grammar"
+                android:icon="@drawable/grammar"
+                android:title="Grammar"/>
+        <item
+                android:id="@+id/nav_dialogue"
+                android:icon="@drawable/chat"
+                android:title="Dialogues"/>
+        <item
+                android:id="@+id/nav_task"
+                android:icon="@drawable/test"
+                android:title="Tasks"/>
+        <item
+                android:id="@+id/nav_game"
+                android:icon="@drawable/game"
+                android:title="Game"/>
+        <item
+                android:id="@+id/nav_recommend"
+                android:icon="@drawable/media"
+                android:title="Recommendations"/>
+    </group>
+    <item android:title="Preferences">
+        <menu>
+            <item
+                    android:id="@+id/nav_setting"
+                    android:icon="@drawable/settings"
+                    android:title="Tools"/>
+            <item
+                    android:id="@+id/logOut"
+                    android:icon="@drawable/exit"
+                    android:title="Log Out"/>
+        </menu>
+    </item>
+</menu>

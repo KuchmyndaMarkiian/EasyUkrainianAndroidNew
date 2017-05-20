@@ -1,0 +1,8 @@
+
+?squid:S1444"*Make this "public static path" field final(Ìµ³š
+Psquid:S2696"6Make the enclosing method "static" or remove this set.(®¸îïüÿÿÿÿ
+?squid:S1166"%Either log or rethrow this exception.(Ÿ¬á´ÿÿÿÿÿ
+:squid:S1166"%Either log or rethrow this exception.(ï­£Ä
+Ysquid:S2147"DCombine this catch with the one at line 62, which has the same body.(ï­£Ä
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ

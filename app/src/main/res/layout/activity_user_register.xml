@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="24dp"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                tools:context=".UserRegisterActivity">
+    <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:background="@drawable/cornercard">
+        <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+                  android:textAlignment="center"
+                  android:textSize="@dimen/headline"
+                  android:padding="12dp"
+                  android:text="Registration"/>
+        <ScrollView android:layout_margin="6dp" android:layout_width="match_parent" android:layout_height="285dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="250dp"
+                          android:orientation="vertical">
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="160dp"
+                                android:onClick="pickAvatar">
+                    <UiClasses.CircleImageView
+                            android:layout_width="128dp"
+                            android:layout_height="128dp"
+                            android:layout_centerHorizontal="true"
+                            android:scaleType="centerInside"
+                            android:padding="12dp"
+                            android:id="@+id/avatar"
+                            android:src="@drawable/user1"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:padding="5dp"
+                            android:layout_below="@+id/avatar"
+                            android:layout_centerHorizontal="true"
+                            android:text="Touch on picture to pick an avatar"
+                            android:textSize="@dimen/caption"/>
+                </RelativeLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Login"
+                            style="@style/TextFieldCaption"
+                    />
+                    <EditText android:layout_width="match_parent"
+                              android:hint="login"
+                              android:id="@+id/login"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Password"
+                            style="@style/TextFieldCaption"/>
+                    <EditText android:id="@+id/password"
+                              android:inputType="textPassword"
+                              android:hint="password"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Confirm Password"
+                            style="@style/TextFieldCaption"/>
+                    <EditText android:id="@+id/confPassword"
+                              android:inputType="textPassword"
+                              android:hint="password"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="E-mail"
+                            style="@style/TextFieldCaption"/>
+                    <EditText android:id="@+id/mail" android:inputType="textEmailAddress"
+                              android:hint="E-mail"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            style="@style/TextFieldCaption"
+                    />
+                    <EditText android:layout_width="match_parent"
+                              android:hint="name"
+                              android:id="@+id/name"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Surname"
+                            style="@style/TextFieldCaption"
+                    />
+                    <EditText android:layout_width="match_parent"
+                              android:hint="surname"
+                              android:id="@+id/surname"
+                              android:layout_height="wrap_content"
+                              style="@style/TextFieldEdit"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date of Birth"
+                            style="@style/TextFieldCaption"
+                    />
+                    <Button android:layout_width="match_parent"
+                            android:text="Date of Birth"
+                            android:id="@+id/dateBirth"
+                            android:layout_height="wrap_content"
+                            style="@style/MyButton"
+                            android:onClick="datePick"
+                    />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Register"
+                android:onClick="registerAcc"
+                style="@style/MyButton"/>
+    </LinearLayout>
+</RelativeLayout>
