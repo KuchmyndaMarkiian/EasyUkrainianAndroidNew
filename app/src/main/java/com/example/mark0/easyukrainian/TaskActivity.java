@@ -2,10 +2,7 @@ package com.example.mark0.easyukrainian;
 
 import Infrastructure.Tasks.Sessions.SessionType;
 import Infrastructure.Tasks.Sessions.TaskSession;
-import MVP.Presenters.GrammarTaskPresenter;
-import MVP.Presenters.IPresenter;
-import MVP.Presenters.TaskPresenter;
-import MVP.Presenters.VocabularyTaskPresenter;
+import MVP.Presenters.*;
 import MVP.Views.IView;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +30,8 @@ public class TaskActivity extends AppCompatActivity implements IView {
                         current.getIntExtra("index", -1));
                 break;
             case EXAM:
+                gettedPresenter = new ExamTaskPresenter((TaskSession) current.getSerializableExtra("session"),
+                        current.getIntExtra("index", -1));
                 break;
         }
 

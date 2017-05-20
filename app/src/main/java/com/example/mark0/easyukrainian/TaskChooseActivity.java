@@ -1,9 +1,6 @@
 package com.example.mark0.easyukrainian;
 
-import Infrastructure.Tasks.Sessions.GrammarSession;
-import Infrastructure.Tasks.Sessions.SessionType;
-import Infrastructure.Tasks.Sessions.TaskSession;
-import Infrastructure.Tasks.Sessions.VocabularySession;
+import Infrastructure.Tasks.Sessions.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,8 +36,9 @@ public class TaskChooseActivity extends AppCompatActivity {
                 break;
             case 2:
                 intent = new Intent(this, TaskActivity.class);
-
+                session = new ExamSession();
                 sessionType=SessionType.EXAM;
+                session.generate(this);
                 break;
             default:
                 Toast.makeText(TaskChooseActivity.this, "Error with taskes", Toast.LENGTH_SHORT).show();

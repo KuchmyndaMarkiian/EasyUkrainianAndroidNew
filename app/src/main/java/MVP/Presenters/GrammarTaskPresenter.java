@@ -1,7 +1,6 @@
 package MVP.Presenters;
 
 import Infrastructure.Tasks.Sessions.TaskSession;
-import Infrastructure.Tasks.Tasks.GuessTask;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -14,24 +13,15 @@ import java.util.ArrayList;
 /**
  * Created by MARKAN on 20.05.2017.
  */
-public class GrammarTaskPresenter extends TaskPresenter implements IRedirectablePresenter {
+public class GrammarTaskPresenter extends TaskPresenter {
+
 
     public GrammarTaskPresenter(TaskSession session, int index) {
-        currentSession = session;
-        currentIndex = index;
-        currentTask = session.getTask(currentIndex);
+        super(session, index);
     }
 
-    @Override
-    protected void initView() {
-        activity = view.getCurrentContext();
-        TextView description = (TextView) activity.findViewById(R.id.description);
-        description.setText(currentTask.getSummary());
-        LinearLayout layout = (LinearLayout) activity.findViewById(R.id.block);
-        initLayout(layout);
-    }
 
-    void initLayout(LinearLayout layout) {
+    protected void initLayout(LinearLayout layout) {
         if (currentTask == null)
             return;
         //Header

@@ -17,26 +17,15 @@ import com.example.mark0.easyukrainian.R;
 /**
  * Created by MARKAN on 15.05.2017.
  */
-public class VocabularyTaskPresenter extends TaskPresenter implements IRedirectablePresenter {
+public class VocabularyTaskPresenter extends TaskPresenter {
+
 
     public VocabularyTaskPresenter(TaskSession session, int index) {
-        currentSession = session;
-        currentIndex = index;
-        currentTask = session.getTask(currentIndex);
-    }
-
-        @Override
-    protected void initView() {
-        activity = view.getCurrentContext();
-        TextView description = (TextView) activity.findViewById(R.id.description);
-        description.setText(currentTask.getSummary());
-        description.setTextSize(28);
-        LinearLayout layout = (LinearLayout) activity.findViewById(R.id.block);
-        initLayout(layout);
+        super(session, index);
     }
 
     //region Initialize View
-    void initLayout(LinearLayout layout) {
+    protected void initLayout(LinearLayout layout) {
         initImageView(layout);
         initTextView(layout);
         initRadioGroup(layout);
