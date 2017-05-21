@@ -46,7 +46,8 @@ public class AutorizationServiceNew {
                 UserPreference.storeUserAccount();
                 isSuccessful = true;
 
-            } else throw new Exception(manager.getMessage());
+            } else
+                throw new Exception(manager.getMessage());
         } catch (final Exception ex) {
             context.runOnUiThread(new Runnable() {
                 @Override

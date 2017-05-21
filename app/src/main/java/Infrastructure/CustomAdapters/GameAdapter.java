@@ -21,7 +21,8 @@ public class GameAdapter extends CommonAdapter {
         Button layout;
         if (convertView == null) {
             Character element = (Character) elements.get(position);
-            layout = new Button(context);
+            layout = new Button(context/*new ContextThemeWrapper(context,R.style.GameButton), null,R.style.GameButton*/);
+
             layout.setText(Character.toString(element));
             final int pos = position;
             layout.setOnClickListener(new View.OnClickListener() {

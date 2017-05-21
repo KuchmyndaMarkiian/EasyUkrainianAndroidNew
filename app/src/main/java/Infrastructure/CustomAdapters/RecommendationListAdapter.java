@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.SparseArray;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class RecommendationListAdapter extends CommonAdapter {
             int wrap = ViewGroup.LayoutParams.WRAP_CONTENT;
             TextView t1 = new TextView(context);
             TextView t2 = new TextView(context);
-            Button but = new Button(context);
+            Button but = new Button(new ContextThemeWrapper(context, R.style.MyButton), null, R.style.MyButton);
             but.setText("OPEN");
             but.setLayoutParams(new LinearLayout.LayoutParams(wrap, wrap));
             but.setGravity(Gravity.CENTER);

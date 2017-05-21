@@ -87,6 +87,7 @@ public class CurrentUser extends User implements Serializable {
         setSurname(simpleUser.getSurname());
         setEmail(simpleUser.getEmail());
         setLevel(simpleUser.getLevel());
+        maxScore = simpleUser.getMaxScore();
         score = simpleUser.getScore();
         setDateOfBirth(simpleUser.dateOfBirth);
     }

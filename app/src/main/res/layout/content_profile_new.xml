@@ -10,7 +10,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:background="@drawable/background"
+        android:background="@drawable/backgroundvector"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_profile_new"
         tools:context="com.example.mark0.easyukrainian.ProfileNewActivity">
@@ -27,11 +27,25 @@
                   android:padding="6dp"
                   android:textSize="@dimen/headline" android:text="User"
                   android:textAlignment="center" />
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/userScoreHeader"
-                  android:padding="6dp"
-                  android:textSize="@dimen/headline" android:text="Score"
-                  android:textAlignment="center"/>
+        <android.support.percent.PercentRelativeLayout
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded"
+                android:layout_width="match_parent" android:layout_height="50dp">
+            <TextView
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="75%"
+                    android:background="@drawable/prograabar"
+                    android:gravity="center"
+                    android:id="@id/progressBar"
+            />
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                      android:id="@+id/userScoreHeader"
+                      android:padding="6dp"
+                      android:textSize="@dimen/headline" android:text="Score"
+                      android:textAlignment="center"
+                      android:gravity="center"/>
+
+        </android.support.percent.PercentRelativeLayout>
         <LinearLayout android:background="@drawable/radiogroup"
                       android:layout_width="match_parent"
                       android:layout_height="240dp"

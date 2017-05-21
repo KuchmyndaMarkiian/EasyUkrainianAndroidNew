@@ -10,6 +10,8 @@ import MVP.Views.IView;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
+import android.support.percent.PercentLayoutHelper;
+import android.support.percent.PercentRelativeLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,10 +56,18 @@ public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
         String fullName = user.getName() + " " + user.getSurname();
         text.setText(fullName);
         text = ((TextView) activity.findViewById(R.id.userScoreHeader));
-        String score = "" + user.getScore();
+        String score = String.valueOf(user.getScore()).concat("/").concat(String.valueOf(user.getMaxScore()));
         text.setText(score);
         ImageView imageView = ((ImageView) activity.findViewById(R.id.userAvatar));
         imageView.setImageBitmap(EasyUkrApplication.getBitmap(user.getAvatar()));
+
+        float percent = (float) user.getScore() / user.getMaxScore();
+
+        View progressBar = activity.findViewById(R.id.progressBar);
+        PercentRelativeLayout.LayoutParams params = (PercentRelativeLayout.LayoutParams) progressBar.getLayoutParams();
+        PercentLayoutHelper.PercentLayoutInfo info = params.getPercentLayoutInfo();
+        info.widthPercent = percent;
+        progressBar.requestLayout();
 
         View navView = navigationView.getHeaderView(0);
         text = (TextView) navView.findViewById(R.id.userDrawerText);

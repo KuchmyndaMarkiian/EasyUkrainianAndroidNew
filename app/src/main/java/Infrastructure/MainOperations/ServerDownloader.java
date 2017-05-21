@@ -17,8 +17,8 @@ public class ServerDownloader<DeserializedType> {
     }
 
     //region Static
-    public static byte[] getFile(String url, String type, String imageId) {
-        return getFile(null, null, url, HttpManager.ParameterType.PARAMETER, type, imageId);
+    public static byte[] getFile(Context context, String url, HttpManager.ParameterType parameterType, String type, String imageId) {
+        return getFile(context, null, url, parameterType, type, imageId);
     }
 
     public static byte[] getFile(Context context, String token, String url, HttpManager.ParameterType parameterType, String type, String imageId) {

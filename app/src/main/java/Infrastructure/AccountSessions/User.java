@@ -20,6 +20,7 @@ public class User extends SimpleUser implements Serializable {
         setEmail(user.email);
         setLevel(user.level);
         setSurname(user.surname);
+        setMaxScore(user.maxScore);
         score = user.score;
         setName(user.name);
     }
@@ -40,6 +41,7 @@ public class User extends SimpleUser implements Serializable {
         res.setLevel(getLevel());
         res.setTested(getIsTested());
         res.setNickname(getNickname());
+        res.setMaxScore(getMaxScore());
         return res;
     }
 

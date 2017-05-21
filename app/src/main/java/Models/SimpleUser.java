@@ -63,6 +63,10 @@ public class SimpleUser implements Serializable {
         return maxScore;
     }
 
+    public void setMaxScore(int maxScore) {
+        this.maxScore = maxScore;
+    }
+
     public Date getDateOfBirth() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS.sss");
         try {

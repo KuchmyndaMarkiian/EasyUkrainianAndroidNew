@@ -29,7 +29,8 @@ public class LoginPresenter extends AutorizationPresenter {
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
                 LoginAsync loginAsync = new LoginAsync(view.getCurrentContext(), model);
                 loginAsync.execute();
-            } else showToast(view.getCurrentContext(), "Wifi isn`t connected");
+            } else
+                showToast(view.getCurrentContext(), "Wifi isn`t connected");
         }
 
         try {

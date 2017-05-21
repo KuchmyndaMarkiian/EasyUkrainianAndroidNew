@@ -63,6 +63,7 @@ public class ProfileNewActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
@@ -75,10 +76,10 @@ public class ProfileNewActivity extends AppCompatActivity
         Class<?> aClass = null;
         Map<String, Serializable> extras = new HashMap<>();
         switch (item.getItemId()) {
-            case R.id.nav_setting: {
+            /*case R.id.nav_setting: {
                 aClass = PreferenceActivity.class;//intent = new Intent(this, PreferenceActivity.class);
                 break;
-            }
+            }*/
             case R.id.nav_vocabulary: {
                 aClass = CardsActivity.class;
                 extras.put("type", EasyUkrFiles.Type.TOPIC);

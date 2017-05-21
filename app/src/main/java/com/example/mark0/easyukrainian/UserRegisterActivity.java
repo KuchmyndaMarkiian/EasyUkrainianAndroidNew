@@ -70,7 +70,7 @@ public class UserRegisterActivity extends AppCompatActivity implements IView,Dat
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-        pickerDialog.setThemeDark(true);
+        pickerDialog.setAccentColor(getResources().getColor(R.color.blueMain, null));
         pickerDialog.show(getFragmentManager(), "Choose date of birth");
     }
 

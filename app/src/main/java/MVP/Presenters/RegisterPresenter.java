@@ -69,8 +69,6 @@ public class RegisterPresenter extends AutorizationPresenter implements IRedirec
         Dialog dialog = EasyUkrApplication.initDialog(view.getCurrentContext());
         dialog.show();
         if (checkModel()) {
-            String message = null;
-            Boolean result = false;
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
                 RegisterAsync registerAsync = new RegisterAsync(view.getCurrentContext(), model);
                 registerAsync.execute();

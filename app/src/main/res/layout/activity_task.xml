@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@drawable/background"
+        android:background="@drawable/backgroundvector"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -17,6 +17,7 @@
 
         <LinearLayout
                 android:id="@+id/block"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,20 +36,21 @@
 
     </RelativeLayout>
     <LinearLayout
+            android:layout_marginTop="20dp"
             android:padding="15dp"
             app:layout_anchor="@id/block"
             android:orientation="horizontal"
             app:layout_anchorGravity="bottom|center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-        <ImageView
+        <!--<ImageView
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:src="@drawable/hint"
                 android:id="@+id/hintButton"
-        />
+        />-->
         <ImageView
                 android:layout_width="56dp"
                 android:layout_height="56dp"

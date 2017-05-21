@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public abstract class TaskSession<T> implements ITaskSession<T> {
     ArrayList<Task> tasks = new ArrayList<>();
-
     @Override
     public int getResult() {
         int res = 0;

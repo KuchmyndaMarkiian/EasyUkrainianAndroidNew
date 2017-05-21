@@ -28,10 +28,10 @@
     </group>
     <item android:title="Preferences">
         <menu>
-            <item
+            <!--<item
                     android:id="@+id/nav_setting"
                     android:icon="@drawable/settings"
-                    android:title="Tools"/>
+                    android:title="Tools"/>-->
             <item
                     android:id="@+id/logOut"
                     android:icon="@drawable/exit"

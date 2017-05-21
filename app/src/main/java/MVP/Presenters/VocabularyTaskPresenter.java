@@ -83,7 +83,7 @@ public class VocabularyTaskPresenter extends TaskPresenter {
                         ViewGroup.LayoutParams.WRAP_CONTENT));
                 radio.setText(strings[i]);
                 radio.setChecked(false);
-                radio.setPadding(15, 15, 15, 35);
+                radio.setPadding(15, 15, 15, 15);
                 radio.setTextSize(16);
                 radio.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 radio.setTextColor(ResourcesCompat.getColor(activity.getResources(), R.color.textStock, null));
@@ -110,6 +110,7 @@ public class VocabularyTaskPresenter extends TaskPresenter {
         if (currentTask instanceof GuessTask)//only Guess
         {
             EditText editText = new EditText(activity);
+            editText.setTextAppearance(R.style.TextFieldEdit);
             editText.setTextSize(36);
             editText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             editText.setTextColor(ContextCompat.getColor(activity, R.color.blueMain));
@@ -146,12 +147,13 @@ public class VocabularyTaskPresenter extends TaskPresenter {
     @Override
     protected void initEvents() {
         super.initEvents();
-        ImageView hint = (ImageView) activity.findViewById(R.id.hintButton);
+        /*ImageView hint = (ImageView) activity.findViewById(R.id.hintButton);
         hint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentSession.
             }
-        });
+        });*/
     }
     //endregion
 }
