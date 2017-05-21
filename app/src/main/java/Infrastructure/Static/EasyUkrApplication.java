@@ -1,6 +1,7 @@
 package Infrastructure.Static;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,8 +12,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.example.mark0.easyukrainian.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -25,16 +28,14 @@ public class EasyUkrApplication {
 
     public static Context Context;
 
-    public static void killThread(Thread thread)
-    {
-        if(thread!=null)
-        {
+    public static void killThread(Thread thread) {
+        if (thread != null) {
             thread.interrupt();
         }
     }
-    public static void killThread(Thread... threads)
-    {
-        for (Thread thread:threads) {
+
+    public static void killThread(Thread... threads) {
+        for (Thread thread : threads) {
             killThread(thread);
         }
     }
@@ -66,7 +67,21 @@ public class EasyUkrApplication {
     }
 
     public static void showToast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        if (context != null) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            //Log.i("Message", message);
+        }
+    }
+
+    public static Dialog initDialog(Activity context) {
+        Dialog res = new Dialog(context);
+        res.setContentView(R.layout.activity_custom_dialog);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(res.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        res.getWindow().setAttributes(lp);
+        return res;
     }
 
     public static String getFullExceptionMessage(Exception e) {

@@ -1,19 +1,15 @@
 package com.example.mark0.easyukrainian;
 
-import Infrastructure.AccountSessions.CurrentUser;
+import Infrastructure.MainOperations.ServerDownloader;
 import Infrastructure.RESTful.Autorization.AutorizationService;
+import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
 import Infrastructure.RESTful.ConstURL;
-import Infrastructure.RESTful.WebAPI.WebApiGet;
+import Infrastructure.RESTful.HTTP.HttpManager;
 import Models.AutorizationModels.Abstract.EditingModel;
 import Models.AutorizationModels.Abstract.UserModel;
-import Models.ModelsFromServer.TopicJson;
-import Models.SimpleUser;
 import android.support.test.runner.AndroidJUnit4;
-import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -22,28 +18,29 @@ import java.util.ArrayList;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-
     @Test
-    public void login() throws Exception {
+    public void loginNew() throws Exception {
         UserModel model = new UserModel();
-        model.setUsername("markan");
+        model.setUsername("mark");
         model.setPassword("Mark95!");
 
-        String Message = "Cool";
-        AutorizationService service = new AutorizationService(null);
-        service.loginModel(model);
-        if (!service.isSuccessfull())
-            Message = service.getAutorizationMessage();
+        AutorizationServiceNew serviceNew = new AutorizationServiceNew(null);
+        serviceNew.login(model);
 
+    }
 
-        System.out.print(Message);
+    @Test
+    public void getImageTest() throws Exception {
+        byte[] img =
+                ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", "6");
+
     }
 
     @Test
     public void register() throws Exception {
 
         EditingModel model = new EditingModel();
-        model.setEmail("mark0611ukr.net");
+        model.setEmail("mark0611@ukr.net");
         model.setName("mark");
         model.setSurname("mark");
         model.setPassword("Mark95!");
@@ -60,35 +57,4 @@ public class ExampleInstrumentedTest {
 
         System.out.print(Message);
     }
-
-    @Test
-    public void getUser() throws Exception {
-        SimpleUser user;
-        WebApiGet apiGet = new WebApiGet();
-        //register();
-        login();
-        user = apiGet.getUserDetails(CurrentUser.getInstance().getToken().getToken());
-    }
-
-    @Test
-    public void asyncTest() throws Exception {
-
-        /*OkHttpAsync async = new OkHttpAsync(/*ConstURL.getGrammarTasksUrl()*);
-        async.run();
-        ArrayList<TopicJson> list = null;
-        while (list == null)
-            list = (new Gson()).fromJson(async.awaitResult().body().string(), new TypeToken<ArrayList<TopicJson>>() {
-            }.getType());
-        int a = list.size();*/
-    }
-
-    @Test
-    public void asyncTest2() throws Exception {
-
-        ArrayList<TopicJson> elements = (ArrayList<TopicJson>) (new WebApiGet()).getContent(ConstURL.getTopicUrl(),
-                new TypeToken<ArrayList<TopicJson>>() {
-                }.getType());
-        int a = elements.size();
-    }
-
 }

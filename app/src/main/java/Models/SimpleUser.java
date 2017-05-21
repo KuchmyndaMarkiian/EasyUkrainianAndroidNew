@@ -23,6 +23,8 @@ public class SimpleUser implements Serializable {
     public String email;
     @SerializedName("Score")
     public int score;
+    @SerializedName("MaxScore")
+    public int maxScore;
     @SerializedName("Level")
     public String level;
     @SerializedName("IsTested")
@@ -55,6 +57,10 @@ public class SimpleUser implements Serializable {
 
     public void setScore(int score) {
         this.score += score;
+    }
+
+    public int getMaxScore() {
+        return maxScore;
     }
 
     public Date getDateOfBirth() {

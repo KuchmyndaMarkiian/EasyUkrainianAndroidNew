@@ -1,8 +1,7 @@
 package com.example.mark0.easyukrainian;
 
 import Hardware.Storage.EasyUkrFiles;
-import Infrastructure.AccountSessions.CurrentUser;
-import Infrastructure.RESTful.Autorization.AutorizationService;
+import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
 import Infrastructure.Tasks.Sessions.ITaskSession;
 import MVP.Presenters.IPresenter;
 import MVP.Presenters.ProfilePresenter;
@@ -111,9 +110,10 @@ public class ProfileNewActivity extends AppCompatActivity
                 break;
             }
             case R.id.logOut: {
-                AutorizationService service = new AutorizationService(this);
-                service.logOut(CurrentUser.getInstance());
-                if (service.isSuccessfull()) {
+                AutorizationServiceNew service = new AutorizationServiceNew(this);
+                service.logout();
+
+                if (service.isSuccessful) {
                     aClass = LoginActivity.class;
                 }
                 break;
@@ -123,6 +123,8 @@ public class ProfileNewActivity extends AppCompatActivity
             presenter.redirectView(aClass, extras);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        if (aClass == LoginActivity.class)
+            finish();
         return true;
     }
 

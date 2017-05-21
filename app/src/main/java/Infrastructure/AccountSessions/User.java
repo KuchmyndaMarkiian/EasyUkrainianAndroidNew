@@ -25,9 +25,9 @@ public class User extends SimpleUser implements Serializable {
     }
     public void cloneFromMemory(User user) {
         cloneFrom(user);
+        setToken(user.getToken());
         setAvatar(user.avatar);
     }
-
     public SimpleUser parseToSimpleUser() {
         SimpleUser res = new SimpleUser();
         res.setName(getName());

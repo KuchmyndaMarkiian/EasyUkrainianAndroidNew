@@ -36,7 +36,6 @@ public final class OkHttp {
 
     private static Response execute(Request request) throws IOException {
         Response response;
-        //Todo: need async 3 loops
         while (true) {
             response = client.newCall(request).execute();
             if (response.code() == 200)

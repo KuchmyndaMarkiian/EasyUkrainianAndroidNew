@@ -1,16 +1,14 @@
 package MVP.Presenters;
 
-import Hardware.SharedPreferences.UserPreference;
 import Hardware.WiFiConnector;
-import Infrastructure.AccountSessions.CurrentUser;
-import Infrastructure.AccountSessions.User;
-import Infrastructure.RESTful.Autorization.AutorizationService;
-import Infrastructure.RESTful.WebAPI.WebApiGet;
+import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.Static.EasyUkrApplication;
 import MVP.Views.IView;
 import Models.AutorizationModels.Abstract.UserModel;
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.AsyncTask;
 import com.example.mark0.easyukrainian.ProfileNewActivity;
-
-import java.io.IOException;
 
 import static Infrastructure.Static.EasyUkrApplication.showToast;
 
@@ -25,31 +23,20 @@ public class LoginPresenter extends AutorizationPresenter {
     }
 
     public void login() {
+        Dialog dialog = EasyUkrApplication.initDialog(view.getCurrentContext());
+        dialog.show();
         if (checkModel()) {
-            String message = null;
-            Boolean result = false;
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
-                AutorizationService service = new AutorizationService(activity);
-                service.loginModel(model);
-                result = service.isSuccessfull();
-                if (result) {
-                    WebApiGet apiGet = new WebApiGet();
-                    try {
-                        User user=CurrentUser.getInstance();
-                        user.cloneFrom(apiGet.getUserDetails(CurrentUser.getInstance().getToken().getToken()));
-                        UserPreference.storeUserAccount(user);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                message = service.getAutorizationMessage();
-            } else {
-                message = "Wifi isn`t connected";
-            }
-            showToast(activity, (result ? "Successful! " : "Error! ") + message);
-            if (result) {
-                redirectView(ProfileNewActivity.class, null);
-            }
+                LoginAsync loginAsync = new LoginAsync(view.getCurrentContext(), model);
+                loginAsync.execute();
+            } else showToast(view.getCurrentContext(), "Wifi isn`t connected");
+        }
+
+        try {
+            dialog.create();
+            dialog.dismiss();
+        } finally {
+
         }
     }
 
@@ -64,5 +51,45 @@ public class LoginPresenter extends AutorizationPresenter {
         activity = view.getCurrentContext();
     }
 
+    private class LoginAsync extends AsyncTask<Void, Void, Void> {
+        private Activity contex;
+        private UserModel model;
+        private AutorizationServiceNew service;
+
+        public LoginAsync(Activity context, UserModel model) {
+            this.model = model;
+            this.contex = context;
+            service = new AutorizationServiceNew(context);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (service.isSuccessful) {
+                redirectView(ProfileNewActivity.class, null);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                service.login(model, true);
+                contex.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast(contex.getBaseContext(), "Successful! You`re signed");
+                    }
+                });
+            } catch (final Exception ex) {
+                contex.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast(contex.getBaseContext(), ex.getMessage());
+                    }
+                });
+            }
+            return null;
+        }
+    }
 
 }

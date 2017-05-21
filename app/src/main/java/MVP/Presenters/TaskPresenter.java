@@ -84,7 +84,7 @@ public abstract class TaskPresenter implements IPresenter, IRedirectablePresente
                     new ParameterPair<String, Serializable>("session", currentSession)
             ));
         } else {
-            //SessionType type=null;
+            currentOption = null;
             redirectView(TaskActivity.class, TemplateMethods.formatParameters(
                     new ParameterPair<String, Serializable>("session", currentSession),
                     new ParameterPair<String, Serializable>("type", currentSession.getSessionType()),

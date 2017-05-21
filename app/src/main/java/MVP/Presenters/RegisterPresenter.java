@@ -5,11 +5,15 @@ import Infrastructure.Interfaces.IConfirmedData;
 import Infrastructure.Interfaces.IModelChecking;
 import Infrastructure.Interfaces.IUserForm;
 import Infrastructure.Interfaces.IValidating;
-import Infrastructure.RESTful.Autorization.AutorizationService;
+import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.Static.EasyUkrApplication;
 import MVP.Views.IView;
 import Models.AutorizationModels.Abstract.EditingModel;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import com.example.mark0.easyukrainian.ProfileNewActivity;
 
@@ -23,13 +27,15 @@ import static Infrastructure.Static.EasyUkrApplication.showToast;
 public class RegisterPresenter extends AutorizationPresenter implements IRedirectablePresenter, IUserForm, IConfirmedData, IModelChecking, IValidating {
     IView view;
     EditingModel model;
+
     public RegisterPresenter() {
         model = new EditingModel();
     }
 
     @Override
     public boolean checkModel() {
-        if(!super.checkModel())
+
+        if (!super.checkModel())
             return false;
 
         try {
@@ -55,25 +61,26 @@ public class RegisterPresenter extends AutorizationPresenter implements IRedirec
             builder.create().show();
             return false;
         }
+
         return true;
     }
+
     public void register() {
+        Dialog dialog = EasyUkrApplication.initDialog(view.getCurrentContext());
+        dialog.show();
         if (checkModel()) {
             String message = null;
             Boolean result = false;
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
-                AutorizationService service = new AutorizationService(activity);
-                service.registerModel(model);
-                result = service.isSuccessfull();
-                message = service.getAutorizationMessage();
+                RegisterAsync registerAsync = new RegisterAsync(view.getCurrentContext(), model);
+                registerAsync.execute();
             } else {
-                message = "Wifi isn`t connected";
+                showToast(view.getCurrentContext(), "Wifi isn`t connected");
             }
-            showToast(activity, (result ? "Successful! " : "Error! ") + message);
-            if(result)
-                redirectView(ProfileNewActivity.class, null);
+            dialog.create();
         }
     }
+
     //region Setters
     @Override
     public void setName(String text) {
@@ -120,10 +127,46 @@ public class RegisterPresenter extends AutorizationPresenter implements IRedirec
     @Override
     public void setView(IView view) {
         this.view = view;
+        activity = view.getCurrentContext();
     }
 
     @Override
     public boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    private class RegisterAsync extends AsyncTask<Void, Void, Void> {
+        private Activity contex;
+        private EditingModel model;
+        private AutorizationServiceNew service;
+
+        public RegisterAsync(Activity context, EditingModel model) {
+            this.model = model;
+            this.contex = context;
+            service = new AutorizationServiceNew(context);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (service.isSuccessful) {
+                redirectView(ProfileNewActivity.class, null);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                service.register(model);
+            } catch (final Exception ex) {
+                contex.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast(contex.getBaseContext(), ex.getMessage());
+                    }
+                });
+            }
+            return null;
+        }
     }
 }

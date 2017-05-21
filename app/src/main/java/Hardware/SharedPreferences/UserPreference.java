@@ -1,5 +1,6 @@
 package Hardware.SharedPreferences;
 
+import Infrastructure.AccountSessions.CurrentUser;
 import Infrastructure.AccountSessions.User;
 import android.content.SharedPreferences;
 import com.google.gson.Gson;
@@ -16,14 +17,19 @@ public class UserPreference {
         sharedPreferences = sp;
     }
 
-    public static void storeUserAccount(Infrastructure.AccountSessions.User user) {
+    public static void storeUserAccount() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.putBoolean(isLoged, true);
-        editor.putString(userAccount, (new Gson()).toJson(user));
+        editor.putString(userAccount, (new Gson()).toJson(CurrentUser.getInstance()));
         editor.apply();
     }
 
+    public static void destroyPreference() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
     public static boolean checkSavedAccount() {
         return sharedPreferences.getBoolean(isLoged, false);
     }

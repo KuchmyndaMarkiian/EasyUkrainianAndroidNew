@@ -8,6 +8,7 @@ import Infrastructure.Tasks.Sessions.ITaskSession;
 import MVP.Views.IProfileView;
 import MVP.Views.IView;
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,9 +27,9 @@ import static Infrastructure.Static.EasyUkrApplication.showToast;
  */
 public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
     IProfileView view;
-    NavigationView navigationView;
-    ITaskSession session;
-    Activity activity;
+    private NavigationView navigationView;
+    private ITaskSession session;
+    private Activity activity;
 
     public ProfilePresenter(ITaskSession session) {
         this.session = session;
@@ -39,18 +40,8 @@ public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
             int result = session.getResult();
             CurrentUser.getInstance().setScore(result);
             showToast(activity, session.getResultMessage());
-
-            (new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-                    //Todo: need fix token losting
-                    UserPreference.storeUserAccount(CurrentUser.getInstance());
-                    CurrentUser.updateInfoToServer(getView().getCurrentContext().getBaseContext());
-                    CurrentUser.getInstance().cloneFromMemory(UserPreference.readUserAccount());
-                    CurrentUser.updateInfoFromServer(getView().getCurrentContext().getBaseContext());
-                }
-            }).start();
+            UpdateAsync updateAsync = new UpdateAsync();
+            updateAsync.execute();
         }
         navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(view);
@@ -95,5 +86,15 @@ public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
         presentModel();
     }
 
+    private class UpdateAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            UserPreference.storeUserAccount();
+            CurrentUser.updateInfoToServer(getView().getCurrentContext());
+            CurrentUser.getInstance().cloneFromMemory(UserPreference.readUserAccount());
+            return null;
+        }
+    }
 
 }
