@@ -8,5 +8,6 @@ import android.app.Activity;
  */
 public interface IView {
     void setPresenter(IPresenter presenter);
+
     Activity getCurrentContext();
 }

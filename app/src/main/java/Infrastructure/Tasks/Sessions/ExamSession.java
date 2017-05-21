@@ -33,7 +33,6 @@ public class ExamSession extends TaskSession implements Serializable {
         tasks = shakeCollection(tasks);
     }
 
-
     @Override
     public SessionType getSessionType() {
         return SessionType.EXAM;

@@ -12,8 +12,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 import com.example.mark0.easyukrainian.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by MARKAN on 18.05.2017.
  */
@@ -30,9 +28,7 @@ public class AnagramAdapterBuilder implements IBuilder {
         GridView viewGame = gamePresenter.getGridLayout();
         Activity descrPart = gamePresenter.getView().getCurrentContext();
         final TextView typedText = (TextView) descrPart.findViewById(R.id.typedWord);
-        TextView foundedWords = (TextView) descrPart.findViewById(R.id.foundedWords);
         SparseArray<Character> characters = gamePresenter.getCollection();
-        final ArrayList<Button> buttons = gamePresenter.getButtons();
 
         viewGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

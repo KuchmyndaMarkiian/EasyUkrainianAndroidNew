@@ -14,18 +14,13 @@ import java.util.ArrayList;
 public class Deserializer<T> {
 
     public EasyUkrFiles.Type type;
-    String path = null;
-    File dir = null;
     private ObjectInputStream inputStream;
 
     public Deserializer(EasyUkrFiles.Type type, File dir) {
 
         this.type = type;
-        path = EasyUkrFiles.setFile(type);
-        this.dir = dir;
-
         try {
-            inputStream = new ObjectInputStream(new FileInputStream(new File(dir, path)));
+            inputStream = new ObjectInputStream(new FileInputStream(new File(dir, EasyUkrFiles.setFile(type))));
         } catch (IOException e) {
             e.printStackTrace();
         }

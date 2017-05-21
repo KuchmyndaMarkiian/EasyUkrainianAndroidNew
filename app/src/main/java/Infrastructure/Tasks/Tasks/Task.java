@@ -13,7 +13,7 @@ public abstract class Task<T> implements Serializable {
     T correctAnswer;
 
     public void checkTask(T object) {
-        isCorrect= correctAnswer.equals(object);
+        isCorrect = correctAnswer.equals(object);
     }
 
     public String getSummary() {

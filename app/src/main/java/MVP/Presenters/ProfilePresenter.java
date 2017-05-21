@@ -47,14 +47,14 @@ public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
         navigationView.setNavigationItemSelectedListener(view);
 
     }
-    private void presentModel()
-    {
-        User user= CurrentUser.getInstance();
+
+    private void presentModel() {
+        User user = CurrentUser.getInstance();
         TextView text = ((TextView) activity.findViewById(R.id.userHeader));
         String fullName = user.getName() + " " + user.getSurname();
         text.setText(fullName);
         text = ((TextView) activity.findViewById(R.id.userScoreHeader));
-        String score=""+user.getScore();
+        String score = "" + user.getScore();
         text.setText(score);
         ImageView imageView = ((ImageView) activity.findViewById(R.id.userAvatar));
         imageView.setImageBitmap(EasyUkrApplication.getBitmap(user.getAvatar()));
@@ -90,11 +90,12 @@ public class ProfilePresenter implements IPresenter, IRedirectablePresenter {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            Activity activity = getView().getCurrentContext();
+            CurrentUser.updateInfoToServer(activity);
+            CurrentUser.updateInfoFromServer(activity);
             UserPreference.storeUserAccount();
-            CurrentUser.updateInfoToServer(getView().getCurrentContext());
             CurrentUser.getInstance().cloneFromMemory(UserPreference.readUserAccount());
             return null;
         }
     }
-
 }

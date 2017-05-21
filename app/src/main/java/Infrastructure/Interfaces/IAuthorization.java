@@ -5,5 +5,6 @@ package Infrastructure.Interfaces;
  */
 public interface IAuthorization {
     void setUsername(String text);
+
     void setPassword(String text);
 }

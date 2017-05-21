@@ -44,7 +44,6 @@ public class UserRegisterActivity extends AppCompatActivity implements IView,Dat
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("image/*");
         startActivityForResult(i, REQUEST);
-        //ImagePicker.pickImage(this, "Select your avatar:");
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
@@ -54,7 +53,7 @@ public class UserRegisterActivity extends AppCompatActivity implements IView,Dat
             Uri path1 = imageReturnedIntent.getData();
             try {
                 imgage = MediaStore.Images.Media.getBitmap(getContentResolver(), path1);
-                path= getRealPathFromUri(this,path1);
+                path = getRealPathFromUri(this, path1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,8 +61,6 @@ public class UserRegisterActivity extends AppCompatActivity implements IView,Dat
         }
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
     }
-
-
 
     public void datePick(View view) {
         Calendar now = Calendar.getInstance();
@@ -90,10 +87,6 @@ public class UserRegisterActivity extends AppCompatActivity implements IView,Dat
         presenter.setName(edit.getText().toString());
         edit = (EditText) findViewById(R.id.surname);
         presenter.setSurname(edit.getText().toString());
-
-        /*presenter.setAvatar(img.getDrawable() == null
-                ? EasyUkrApplication.getImageBytes(img)
-                : EasyUkrApplication.getImageBytes(getBitmap(img.getDrawable())));*/
         presenter.register();
     }
 

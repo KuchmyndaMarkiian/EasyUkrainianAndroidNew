@@ -91,5 +91,4 @@ public class LoginPresenter extends AutorizationPresenter {
             return null;
         }
     }
-
 }

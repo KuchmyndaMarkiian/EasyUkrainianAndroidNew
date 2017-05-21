@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.os.StrictMode;
 import com.google.gson.Gson;
 import okhttp3.*;
-import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,28 +43,6 @@ public final class OkHttp {
 
     }
 
-    //region Type of Parameters
-    private static Request requestGetWithHeaders(String url, Map<String, String> parameters) {
-        Request.Builder builder = new Request.Builder();
-        builder.url(url);
-        if (parameters != null && parameters.size() > 0) {
-            for (Map.Entry<String, String> item : parameters.entrySet()) {
-                builder.addHeader(item.getKey(), item.getValue());
-            }
-        }
-        return builder.build();
-    }
-
-    private static Request requestGetWithParameters(String url, Map<String, String> parameters) {
-        HttpUrl.Builder builder = HttpUrl.parse(url).newBuilder();
-        if (parameters != null && parameters.size() > 0) {
-            for (Map.Entry<String, String> item : parameters.entrySet()) {
-                builder.addQueryParameter(item.getKey(), item.getValue());
-            }
-        }
-        return new Request.Builder().url(builder.build()).build();
-    }
-
     //endregion
     //region POST
     public static boolean requestPost(String url, String json, String mediaType, Map<String, String> headers) throws IOException {
@@ -97,23 +74,6 @@ public final class OkHttp {
                 .build();
         Request request = new Request.Builder().url(url).header(parameter.key, parameter.value).post(builder.build()).build();
         return execute(request).code() == 200;
-    }
-
-    //endregion
-    //region GET
-    public static String requestGetAsString(String url, Map<String, String> parameters) throws IOException {
-        return execute(requestGetWithHeaders(url, parameters)).body().string();
-    }
-
-    public static byte[] requestGetAsBytes(String url, ParameterType parameterType, Map<String, String> parameters) throws IOException {
-        switch (parameterType) {
-            case HEADER_TYPE:
-                return IOUtils.toByteArray(execute(requestGetWithHeaders(url, parameters)).body().byteStream());
-            case PARAMETER_TYPE:
-                return IOUtils.toByteArray(execute(requestGetWithParameters(url, parameters)).body().byteStream());
-            default:
-                return null;
-        }
     }
 
     //endregion
@@ -153,7 +113,5 @@ public final class OkHttp {
                         RequestBody.create(null, new byte[0]))
                 .build()).code() == 200;
     }
-
-    public enum ParameterType {HEADER_TYPE, PARAMETER_TYPE}
     //endregion
 }

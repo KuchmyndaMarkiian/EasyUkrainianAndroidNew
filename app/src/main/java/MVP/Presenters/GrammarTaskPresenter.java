@@ -29,7 +29,7 @@ public class GrammarTaskPresenter extends TaskPresenter {
         //Description
         layout.addView(initTextView((String) currentTask.getContent()));
         //Group
-        layout.addView(initRadioGroup(),new RadioGroup.LayoutParams(
+        layout.addView(initRadioGroup(), new RadioGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
     }

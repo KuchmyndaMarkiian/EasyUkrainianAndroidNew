@@ -16,7 +16,6 @@ public final class ConstURL {
     private static final String wordUrl = "api/Transmit/Words";
     private static final String grammarUrl = "api/Transmit/Grammars";
     private static final String grammarTasksUrl = "api/Transmit/GrammarTasks";
-    private static final String translateUrl = "api/Transmit/Translates";
     private static final String recommCatUrl = "api/Transmit/RecommendationCategories";
     private static final String recommUrl = "api/Transmit/Recommendations";
     private static final String dialogueUrl = "api/Transmit/Dialogues";

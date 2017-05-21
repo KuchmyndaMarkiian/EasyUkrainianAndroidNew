@@ -13,10 +13,4 @@ public class WordTask<T> extends Task<T> implements Serializable {
         correctAnswer = index;
         this.options = options;
     }
-
-    /*@Override
-    public void checkTask(T object) {
-        isCorrect = object == correctAnswer;
-    }*/
-
 }

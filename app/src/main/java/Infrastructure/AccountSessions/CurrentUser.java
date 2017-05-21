@@ -65,12 +65,8 @@ public class CurrentUser extends User implements Serializable {
                         }
                     });
                 }
-
-
-                /*WebApiPost apiPost = new WebApiPost();
-                apiPost.putDetails(CurrentUser.getInstance().parseToSimpleUser());*/
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }
@@ -93,10 +89,5 @@ public class CurrentUser extends User implements Serializable {
         setLevel(simpleUser.getLevel());
         score = simpleUser.getScore();
         setDateOfBirth(simpleUser.dateOfBirth);
-    }
-
-    public void clear() {
-        CurrentUser user = this;
-        user = null;
     }
 }

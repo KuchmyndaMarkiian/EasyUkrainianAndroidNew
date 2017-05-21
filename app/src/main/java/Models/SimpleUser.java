@@ -64,7 +64,7 @@ public class SimpleUser implements Serializable {
     }
 
     public Date getDateOfBirth() {
-        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-mm-dd HH:MM:SS.sss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:MM:SS.sss");
         try {
             return dateFormat.parse(dateOfBirth);
         } catch (ParseException e) {
@@ -101,7 +101,7 @@ public class SimpleUser implements Serializable {
         this.surname = surname;
     }
 
-    public boolean getIsTested(){
+    public boolean getIsTested() {
         return isTested;
     }
 }

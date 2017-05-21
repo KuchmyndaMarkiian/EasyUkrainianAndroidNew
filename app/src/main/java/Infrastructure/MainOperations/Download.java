@@ -2,7 +2,6 @@ package Infrastructure.MainOperations;
 
 import Hardware.Storage.EasyUkrFiles;
 import Infrastructure.RESTful.ConstURL;
-import Infrastructure.RESTful.HTTP.HttpManager;
 import Infrastructure.Serialization.Serializer;
 import Models.LearningResources.*;
 import Models.ModelsFromServer.*;
@@ -24,7 +23,7 @@ public class Download {
                         }.getType());
                 for (TopicJson topic : tmp) {
                     elements.add(new Word(null, topic.id, topic.text, topic.translate,
-                            ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", String.valueOf(topic.translateImageId))));
+                            ServerDownloader.getFile(ConstURL.getFileUrl(), "word", String.valueOf(topic.translateImageId))));
                 }
                 serial.writeObject(elements);
             } else if (serial.mainType == EasyUkrFiles.Type.WORD) {
@@ -35,7 +34,7 @@ public class Download {
 
                 for (WordJson word : tmp) {
                     elements.add(new Word(word.parentId, word.id, word.text, word.translate,
-                            ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", String.valueOf(word.translateImageId))));
+                            ServerDownloader.getFile(ConstURL.getFileUrl(), "word", String.valueOf(word.translateImageId))));
                 }
                 serial.writeObject(elements);
             }
@@ -53,7 +52,7 @@ public class Download {
 
             for (GrammarJson grammar : tmp) {
                 elements.add(new Grammar(grammar.text, grammar.translate,
-                        ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "grammar", String.valueOf(grammar.id))));
+                        ServerDownloader.getFile(ConstURL.getFileUrl(), "grammar", String.valueOf(grammar.id))));
             }
             serial.writeObject(elements);
         } finally {
@@ -82,9 +81,8 @@ public class Download {
             for (RecommendationCategoryJson recommcat : tmp) {
                 elements.add(new RecommendationCategory(recommcat.id, recommcat.text,
                         recommcat.translate,
-                        ServerDownloader.getFile(null,
+                        ServerDownloader.getFile(
                                 ConstURL.getFileUrl(),
-                                HttpManager.ParameterType.PARAMETER,
                                 "recommendc",
                                 String.valueOf(recommcat.id))));
             }
@@ -103,9 +101,8 @@ public class Download {
             for (RecommendationJson recommend : tmp) {
                 elements.add(new Recommendation(recommend.text,
                         recommend.translate, recommend.urlLink,
-                        ServerDownloader.getFile(null,
+                        ServerDownloader.getFile(
                                 ConstURL.getFileUrl(),
-                                HttpManager.ParameterType.PARAMETER,
                                 "recommend",
                                 String.valueOf(recommend.id)),
                         recommend.parentId));
@@ -124,8 +121,7 @@ public class Download {
                     }.getType());
             for (DialogueJson dialogue : tmp) {
                 elements.add(new Dialogue(dialogue.id, dialogue.header, dialogue.dialogueUkr, dialogue.dialogueEng,
-                        ServerDownloader.getFile(null, ConstURL.getFileUrl(),
-                                HttpManager.ParameterType.PARAMETER,
+                        ServerDownloader.getFile(ConstURL.getFileUrl(),
                                 "dialogue",
                                 String.valueOf(dialogue.id))));
             }

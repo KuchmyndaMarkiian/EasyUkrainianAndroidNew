@@ -30,6 +30,7 @@ public class UserPreference {
         editor.clear();
         editor.apply();
     }
+
     public static boolean checkSavedAccount() {
         return sharedPreferences.getBoolean(isLoged, false);
     }

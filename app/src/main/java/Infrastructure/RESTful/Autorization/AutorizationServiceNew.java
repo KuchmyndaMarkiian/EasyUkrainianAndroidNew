@@ -30,7 +30,7 @@ public class AutorizationServiceNew {
 
     public void login(UserModel model, boolean update) {
         try {
-            HttpManager<Token> manager = new HttpManager(context, ConstURL.getLoginUrl());
+            HttpManager<Token> manager = new HttpManager<>(context, ConstURL.getLoginUrl());
             manager.putFormBody(new ParameterPair<>("grant_type", "password"),
                     new ParameterPair<>("username", model.getUsername()),
                     new ParameterPair<>("password", model.getPassword()));
@@ -64,7 +64,6 @@ public class AutorizationServiceNew {
                 if (apiPost.registerUser(model)) {
                     CurrentUser.updateInfoFromServer(context);
                     isSuccessful = true;
-                } else {
                 }
             } catch (final Exception e) {
                 context.runOnUiThread(new Runnable() {
@@ -94,7 +93,6 @@ public class AutorizationServiceNew {
                 isSuccessful = true;
             }
         } finally {
-            CurrentUser.getInstance().clear();
             UserPreference.destroyPreference();
         }
     }

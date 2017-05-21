@@ -1,11 +1,6 @@
 package com.example.mark0.easyukrainian;
 
-import Infrastructure.MainOperations.ServerDownloader;
-import Infrastructure.RESTful.Autorization.AutorizationService;
 import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
-import Infrastructure.RESTful.ConstURL;
-import Infrastructure.RESTful.HTTP.HttpManager;
-import Models.AutorizationModels.Abstract.EditingModel;
 import Models.AutorizationModels.Abstract.UserModel;
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
@@ -25,21 +20,21 @@ public class ExampleInstrumentedTest {
         model.setPassword("Mark95!");
 
         AutorizationServiceNew serviceNew = new AutorizationServiceNew(null);
-        serviceNew.login(model);
+        //serviceNew.login(model);
 
     }
 
     @Test
     public void getImageTest() throws Exception {
-        byte[] img =
-                ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", "6");
+        //byte[] img =
+        //  ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", "6");
 
     }
 
     @Test
     public void register() throws Exception {
 
-        EditingModel model = new EditingModel();
+       /* EditingModel model = new EditingModel();
         model.setEmail("mark0611@ukr.net");
         model.setName("mark");
         model.setSurname("mark");
@@ -55,6 +50,6 @@ public class ExampleInstrumentedTest {
             Message = service.getAutorizationMessage();
 
 
-        System.out.print(Message);
+        System.out.print(Message);*/
     }
 }

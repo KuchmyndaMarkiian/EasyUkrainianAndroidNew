@@ -35,7 +35,7 @@ public class AutorizationPresenter implements IPresenter, IModelChecking, IAutho
     }
 
     public void setActivity(Activity activity) {
-        this.activity=activity;
+        this.activity = activity;
     }
 
     @Override

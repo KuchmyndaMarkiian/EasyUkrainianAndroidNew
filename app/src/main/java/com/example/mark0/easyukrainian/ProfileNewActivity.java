@@ -24,6 +24,7 @@ import java.util.Map;
 public class ProfileNewActivity extends AppCompatActivity
         implements IProfileView {
     private ProfilePresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +37,7 @@ public class ProfileNewActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-
         setPresenter(new ProfilePresenter((ITaskSession) getIntent().getSerializableExtra("session")));
-
     }
 
     @Override

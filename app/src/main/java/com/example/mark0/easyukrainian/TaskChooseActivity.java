@@ -25,19 +25,19 @@ public class TaskChooseActivity extends AppCompatActivity {
             case 0:
                 intent = new Intent(this, TaskActivity.class);
                 session = new VocabularySession();
-                sessionType=SessionType.VOCABULARY;
+                sessionType = SessionType.VOCABULARY;
                 session.generate(this);
                 break;
             case 1:
                 intent = new Intent(this, TaskActivity.class);
                 session = new GrammarSession();
-                sessionType=SessionType.GRAMMAR;
+                sessionType = SessionType.GRAMMAR;
                 session.generate(this);
                 break;
             case 2:
                 intent = new Intent(this, TaskActivity.class);
                 session = new ExamSession();
-                sessionType=SessionType.EXAM;
+                sessionType = SessionType.EXAM;
                 session.generate(this);
                 break;
             default:
@@ -46,7 +46,7 @@ public class TaskChooseActivity extends AppCompatActivity {
         }
         if (intent != null) {
             intent.putExtra("session", session);
-            intent.putExtra("type",sessionType);
+            intent.putExtra("type", sessionType);
             intent.putExtra("index", 0);
             startActivity(intent);
             finish();

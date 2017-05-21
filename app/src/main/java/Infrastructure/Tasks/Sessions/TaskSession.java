@@ -28,5 +28,4 @@ public abstract class TaskSession<T> implements ITaskSession<T> {
     public ArrayList getGenerategData() {
         return tasks;
     }
-
 }

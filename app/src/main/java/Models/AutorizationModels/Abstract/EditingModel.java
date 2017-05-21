@@ -50,10 +50,6 @@ public class EditingModel extends UserModel {
         Date = sdfDate.format(dateOfBirth.getTime());
     }
 
-    //public byte[] getAvatar() {
-    // return Avatar;
-    // }
-
     public String getSurname() {
         return Surname;
     }

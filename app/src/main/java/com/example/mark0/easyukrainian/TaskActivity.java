@@ -17,16 +17,15 @@ public class TaskActivity extends AppCompatActivity implements IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
-        Intent current=getIntent();
+        Intent current = getIntent();
         IPresenter gettedPresenter = null;
-        switch ((SessionType)current.getSerializableExtra("type"))
-        {
+        switch ((SessionType) current.getSerializableExtra("type")) {
             case VOCABULARY:
-                gettedPresenter=new VocabularyTaskPresenter((TaskSession) current.getSerializableExtra("session"),
+                gettedPresenter = new VocabularyTaskPresenter((TaskSession) current.getSerializableExtra("session"),
                         current.getIntExtra("index", -1));
                 break;
             case GRAMMAR:
-                gettedPresenter=new GrammarTaskPresenter((TaskSession) current.getSerializableExtra("session"),
+                gettedPresenter = new GrammarTaskPresenter((TaskSession) current.getSerializableExtra("session"),
                         current.getIntExtra("index", -1));
                 break;
             case EXAM:
@@ -37,6 +36,7 @@ public class TaskActivity extends AppCompatActivity implements IView {
 
         setPresenter(gettedPresenter);
     }
+
     @Override
     public void setPresenter(IPresenter presenter) {
         this.presenter = (TaskPresenter) presenter;

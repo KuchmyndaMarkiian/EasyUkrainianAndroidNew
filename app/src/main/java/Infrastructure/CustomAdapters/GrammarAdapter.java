@@ -19,6 +19,7 @@ public class GrammarAdapter extends CommonAdapter {
     public GrammarAdapter(Context context, SparseArray list) {
         super(context, list);
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         GridLayout layout;

@@ -13,21 +13,23 @@ public class User extends SimpleUser implements Serializable {
 
     public User() {
     }
-    public void cloneFrom(SimpleUser user)
-    {
+
+    public void cloneFrom(SimpleUser user) {
         setNickname(user.nickname);
         setDateOfBirth(user.dateOfBirth);
         setEmail(user.email);
         setLevel(user.level);
         setSurname(user.surname);
-        score=user.score;
+        score = user.score;
         setName(user.name);
     }
+
     public void cloneFromMemory(User user) {
         cloneFrom(user);
         setToken(user.getToken());
         setAvatar(user.avatar);
     }
+
     public SimpleUser parseToSimpleUser() {
         SimpleUser res = new SimpleUser();
         res.setName(getName());

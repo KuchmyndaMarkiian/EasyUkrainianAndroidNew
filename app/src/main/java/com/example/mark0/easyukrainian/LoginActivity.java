@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity implements IView {
     public void login(View view) {
         EditText editText = (EditText) findViewById(R.id.login);
         presenter.setUsername(editText.getEditableText().toString());
-        editText=(EditText) findViewById(R.id.password);
+        editText = (EditText) findViewById(R.id.password);
         presenter.setPassword(editText.getEditableText().toString());
         presenter.login();
     }
@@ -42,6 +42,4 @@ public class LoginActivity extends AppCompatActivity implements IView {
     public Activity getCurrentContext() {
         return this;
     }
-
-
 }

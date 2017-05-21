@@ -13,8 +13,4 @@ public class GuessTask<T> extends Task<T> implements Serializable {
         this.content = image;
         this.correctAnswer = answer;
     }
-    /*@Override
-    public void checkTask(T object) {
-        isCorrect = correctAnswer.equals(object);
-    }*/
 }

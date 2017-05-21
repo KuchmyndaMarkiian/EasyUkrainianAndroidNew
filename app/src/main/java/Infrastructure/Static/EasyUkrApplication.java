@@ -7,17 +7,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.mark0.easyukrainian.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -26,42 +21,6 @@ import java.util.Map;
  */
 public class EasyUkrApplication {
 
-    public static Context Context;
-
-    public static void killThread(Thread thread) {
-        if (thread != null) {
-            thread.interrupt();
-        }
-    }
-
-    public static void killThread(Thread... threads) {
-        for (Thread thread : threads) {
-            killThread(thread);
-        }
-    }
-
-    public static byte[] getImageBytes(ImageView imageView) {
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        return baos.toByteArray();
-    }
-
-    public static byte[] getImageBytes(Bitmap imageView) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imageView.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        return baos.toByteArray();
-    }
-
-    public static Bitmap getBitmap(Drawable vectorDrawable) {
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
-        return bitmap;
-    }
-
     public static Bitmap getBitmap(byte[] bytes) {
         return bytes != null ? BitmapFactory.decodeByteArray(bytes, 0, bytes.length) : null;
     }
@@ -69,7 +28,6 @@ public class EasyUkrApplication {
     public static void showToast(Context context, String message) {
         if (context != null) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            //Log.i("Message", message);
         }
     }
 
@@ -82,18 +40,6 @@ public class EasyUkrApplication {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         res.getWindow().setAttributes(lp);
         return res;
-    }
-
-    public static String getFullExceptionMessage(Exception e) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Main message: ");
-        builder.append(e.getMessage()).append("\n");
-        builder.append("Caused by:");
-        try {
-            builder.append(e.getCause().getMessage());
-        } finally {
-            return builder.toString();
-        }
     }
 
     public static void redirectToIntent(Activity activity, Class<?> aClass, boolean finish, Map<String, Serializable> extras) {
@@ -122,5 +68,4 @@ public class EasyUkrApplication {
             }
         }
     }
-
 }

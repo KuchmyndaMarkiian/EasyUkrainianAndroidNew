@@ -34,8 +34,7 @@ public class HttpManager<Type> {
     String mainUrl;
     Response result;
     Context context;
-    //endregion
-    //region Exception & Message code
+
     String message = "Cool";
     private OkHttpClient client;
     private SynchronizationType synchronizationType;
@@ -146,7 +145,7 @@ public class HttpManager<Type> {
         return client.newCall(request).execute();
     }
 
-    Response executeAsync(Request request) throws IOException {
+    Response executeAsync(Request request) {
         final Response[] responseResult = new Response[1];
         final boolean[] isFinished = {false};
         client.newCall(request).enqueue(new Callback() {
@@ -246,6 +245,8 @@ public class HttpManager<Type> {
         }
     }
 
+    //endregion
+    //region Exception & Message code
     public String getMessage() {
         return message;
     }
@@ -257,10 +258,12 @@ public class HttpManager<Type> {
         }
     }
 
-    public enum ParameterType {HEADER, PARAMETER}
+    //endregion
+    public enum ParameterType {
+        HEADER, PARAMETER
+    }
 
     public enum Method {GET, POST}
 
     public enum SynchronizationType {ASYNC, SYNC}
-    //endregion
 }

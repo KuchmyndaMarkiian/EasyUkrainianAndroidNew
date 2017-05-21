@@ -26,20 +26,6 @@ public final class TemplateMethods {
             if (!filter.contains(o))
                 filter.add(o);
         }
-        Collection result = filter;
-        return (T) result;
-    }
-
-    public static <T extends Collection> void swap(T object1, T object2) {
-        Object[] obj1 = object1.toArray();
-        Object[] obj2 = object2.toArray();
-        object1 = (T) Arrays.asList(obj2);
-        object2 = (T) Arrays.asList(obj1);
-    }
-
-    public static <T> void swap(T object1, T object2) {
-        T tmp = object1;
-        object1 = object2;
-        object2 = tmp;
+        return (T) filter;
     }
 }

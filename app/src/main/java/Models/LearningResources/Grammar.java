@@ -15,7 +15,7 @@ public class Grammar implements Serializable {
     public Grammar(String header, String translate, byte[] file) {
         this.header = header;
         this.translate = translate;
-        this.file = new MyFile(header+".pdf", file);
+        this.file = new MyFile(header + ".pdf", file);
     }
 
     public MyFile getFile() {

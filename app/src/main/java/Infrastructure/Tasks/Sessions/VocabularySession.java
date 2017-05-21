@@ -28,7 +28,7 @@ public class VocabularySession extends TaskSession implements Serializable {
     public void generate(Activity activity) {
         ArrayList<PictureTask<Integer>> pictureTasks = new ArrayList<>();
         ArrayList<WordTask<Integer>> wordTasks = new ArrayList<>();
-        ArrayList<GuessTask<String>> guessTasks =new ArrayList<>();
+        ArrayList<GuessTask<String>> guessTasks = new ArrayList<>();
         Deserializer<Word> deserializer = new Deserializer<>(EasyUkrFiles.Type.WORD, EasyUkrFiles.defaultpath);
         ArrayList<Word> list = deserializer.readObject();
         ArrayList<Word> filter = new ArrayList<>();

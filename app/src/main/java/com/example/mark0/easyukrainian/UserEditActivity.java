@@ -36,16 +36,6 @@ public class UserEditActivity extends AppCompatActivity {
         mail = (EditText) findViewById(R.id.mail);
         password = (EditText) findViewById(R.id.password);
         avatar = (ImageView) findViewById(R.id.avatar);
-
-        /*User user = (User) getIntent().getSerializableExtra(EasyUkrApplication.User);
-        login.setText(user.getNick());
-        password.setText(user.getPassword());
-        mail.setText(user.getMail());
-
-        mail.setEnabled(false);
-        if (user.getPassword() == null && Objects.equals(user.getPassword(), ""))
-            password.setEnabled(false);*/
-
     }
 
     public void pickAvatar(View view) {
@@ -69,14 +59,6 @@ public class UserEditActivity extends AppCompatActivity {
                 throw new Exception("E-Mail is empty or incorrect");
             if (!password.isEnabled() && Objects.equals(pass, ""))
                 throw new Exception("Password is empty");
-
-            /*User userFrom = (User) getIntent().getSerializableExtra(EasyUkrApplication.User);
-            User user = new User(log, pass, mail1, false,
-                    (img.getDrawable() == null
-                            ? EasyUkrApplication.getImageBytes(img) :
-                            EasyUkrApplication.getImageBytes(getBitmap(img.getDrawable())))
-                    , userFrom.getScore());*/
-            //UserSession.getInstance().UpdateUser(user);
         } catch (Exception ex) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Error")
@@ -93,7 +75,5 @@ public class UserEditActivity extends AppCompatActivity {
             startActivity(new Intent(this, ProfileNewActivity.class));
         }
     }
-
-
 }
 
