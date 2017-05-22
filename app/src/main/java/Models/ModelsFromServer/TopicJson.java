@@ -10,6 +10,8 @@ public class TopicJson {
     public int id;
     @SerializedName("Text")
     public String text;
+    @SerializedName("Transcription")
+    public String transcription;
     @SerializedName("Translate")
     public String translate;
     @SerializedName("TranslateImageId")

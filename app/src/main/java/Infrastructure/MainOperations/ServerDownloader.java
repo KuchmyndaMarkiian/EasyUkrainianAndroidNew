@@ -1,7 +1,7 @@
 package Infrastructure.MainOperations;
 
-import Infrastructure.CustomTypes.ParameterPair;
-import Infrastructure.RESTful.HTTP.HttpManager;
+import Infrastructure.CustomTypes.Tuple;
+import Infrastructure.RESTful.HTTP.OkHttp3Manager;
 import android.content.Context;
 
 import java.lang.reflect.Type;
@@ -11,41 +11,41 @@ import java.lang.reflect.Type;
  */
 public class ServerDownloader<DeserializedType> {
     private final Context contex;
-
     public ServerDownloader(Context context) {
         this.contex = context;
     }
-
     //region Static
-    public static byte[] getFile(Context context, String url, HttpManager.ParameterType parameterType, String type, String imageId) {
+    //Стягування файлу з серверу
+    public static byte[] getFile(Context context, String url, OkHttp3Manager.ParameterType parameterType, String type, String imageId) {
         return getFile(context, null, url, parameterType, type, imageId);
     }
 
-    public static byte[] getFile(Context context, String token, String url, HttpManager.ParameterType parameterType, String type, String imageId) {
-        HttpManager httpManager = new HttpManager(context, url);
-        if (parameterType == HttpManager.ParameterType.HEADER) {
-            httpManager.putHeaders(new ParameterPair<>("authorization", token),
-                    new ParameterPair<>("type", type),
-                    new ParameterPair<>("id", imageId));
+    public static byte[] getFile(Context context, String token, String url, OkHttp3Manager.ParameterType parameterType, String type, String imageId) {
+        OkHttp3Manager okHttp3Manager = new OkHttp3Manager(context, url);
+        if (parameterType == OkHttp3Manager.ParameterType.HEADER) {
+            okHttp3Manager.putHeaders(new Tuple<>("authorization", token),
+                    new Tuple<>("type", type),
+                    new Tuple<>("id", imageId));
         } else {
-            httpManager.putParameters(new ParameterPair<>("authorization", token),
-                    new ParameterPair<>("type", type),
-                    new ParameterPair<>("id", imageId));
+            okHttp3Manager.putParameters(new Tuple<>("authorization", token),
+                    new Tuple<>("type", type),
+                    new Tuple<>("id", imageId));
         }
-        httpManager.execute(HttpManager.Method.GET, HttpManager.SynchronizationType.SYNC);
-        if (httpManager.isSuccessful()) {
-            return httpManager.getAsBytes();
+        okHttp3Manager.execute(OkHttp3Manager.Method.GET, OkHttp3Manager.SynchronizationType.SYNC);
+        if (okHttp3Manager.isSuccessful()) {
+            return okHttp3Manager.getAsBytes();
         }
         return null;
     }
 
+    //endregion
+    //Перетворення JSON ресурсів у об'єкти
     public DeserializedType getContent(String url, Type type) {
-        HttpManager<DeserializedType> manager = new HttpManager<>(contex, url);
-        manager.execute(HttpManager.Method.GET, HttpManager.SynchronizationType.ASYNC);
+        OkHttp3Manager<DeserializedType> manager = new OkHttp3Manager<>(contex, url);
+        manager.execute(OkHttp3Manager.Method.GET, OkHttp3Manager.SynchronizationType.ASYNC);
         if (manager.isSuccessful()) {
             return manager.getAsObject(type);
         }
         return null;
     }
-    //endregion
 }

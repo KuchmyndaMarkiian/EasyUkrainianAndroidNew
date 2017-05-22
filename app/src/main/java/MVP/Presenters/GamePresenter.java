@@ -1,6 +1,6 @@
 package MVP.Presenters;
 
-import Infrastructure.CustomTypes.ParameterPair;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.Patterns.Builders.AnagramAdapterBuilder;
 import Infrastructure.Patterns.Builders.IBuilder;
 import Infrastructure.Static.EasyUkrApplication;
@@ -25,18 +25,19 @@ import static Infrastructure.Static.EasyUkrApplication.redirectToIntent;
 /**
  * Created by MARKAN on 18.05.2017.
  */
+//Пред'явник для гри
 public class GamePresenter implements IPresenter, IRedirectablePresenter {
     private IView view;
     private GameSession gameSession;
     private GridView gridLayout;
     private ArrayList<Button> buttons;
     private ArrayList<Button> clickedButtons;
-
     public GamePresenter() {
         buttons = new ArrayList<>();
         clickedButtons = new ArrayList<>();
     }
 
+    //Ініціалізація поля
     public void init() {
         final Activity contex = view.getCurrentContext();
         gridLayout =
@@ -44,7 +45,6 @@ public class GamePresenter implements IPresenter, IRedirectablePresenter {
         gameSession.generate(view.getCurrentContext());
         IBuilder builder = new AnagramAdapterBuilder(this);
         builder.setParts();
-
         //region init button events
         contex.findViewById(R.id.checkButton).setOnClickListener(
                 new View.OnClickListener() {
@@ -53,7 +53,7 @@ public class GamePresenter implements IPresenter, IRedirectablePresenter {
                         String word = ((TextView) contex.findViewById(R.id.typedWord)).getText().toString();
                         if (gameSession.checkAnagram(word)) {
                             if (gameSession.isFinished()) {
-                                redirectView(ProfileNewActivity.class, formatParameters(new ParameterPair<String, Serializable>("session", gameSession)));
+                                redirectView(ProfileNewActivity.class, formatParameters(new Tuple<String, Serializable>("session", gameSession)));
                             }
                             TextView txtv = (TextView) contex.findViewById(R.id.foundedWords);
                             String text = txtv.getText().toString();
@@ -76,43 +76,34 @@ public class GamePresenter implements IPresenter, IRedirectablePresenter {
         });
         //endregion
     }
-
-
     @Override
     public IView getView() {
         return view;
     }
-
     @Override
     public void setView(IView view) {
         this.view = view;
         gameSession = new GameSession(this.view.getCurrentContext());
     }
-
     public GridView getGridLayout() {
         return gridLayout;
     }
 
-    public ArrayList<Button> getButtons() {
-        return buttons;
-    }
-
+    //region Алгоритм для роботи з кнопками
     public void addClickedButton(Button button) {
         clickedButtons.add(button);
     }
-
     private void resetClickedButtonsForce() {
         for (Button button : clickedButtons) {
             button.setEnabled(true);
         }
         clickedButtons.clear();
     }
-
     private void resetClickedButtons() {
         clickedButtons.clear();
     }
 
-
+    //endregion
     public SparseArray<Character> getCollection() {
         ArrayList<Character> tmp = gameSession.getGenerategData();
         int index = 0;
@@ -122,7 +113,6 @@ public class GamePresenter implements IPresenter, IRedirectablePresenter {
         }
         return result;
     }
-
     @Override
     public void redirectView(Class<?> aClass, Map<String, Serializable> extras) {
         redirectToIntent(getView().getCurrentContext(), aClass, true, extras);

@@ -3,40 +3,42 @@ package Infrastructure.RESTful.Autorization;
 import Hardware.SharedPreferences.UserPreference;
 import Infrastructure.AccountSessions.CurrentUser;
 import Infrastructure.AccountSessions.Token;
-import Infrastructure.CustomTypes.ParameterPair;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.RESTful.ConstURL;
-import Infrastructure.RESTful.HTTP.HttpManager;
+import Infrastructure.RESTful.HTTP.OkHttp3Manager;
 import Infrastructure.RESTful.WebAPI.WebApiPost;
 import Models.AutorizationModels.Abstract.EditingModel;
 import Models.AutorizationModels.Abstract.UserModel;
 import android.app.Activity;
 
-import static Infrastructure.RESTful.HTTP.HttpManager.JsonType;
-import static Infrastructure.RESTful.HTTP.HttpManager.WwwFormType;
+import static Infrastructure.RESTful.HTTP.OkHttp3Manager.JsonType;
+import static Infrastructure.RESTful.HTTP.OkHttp3Manager.WwwFormType;
 import static Infrastructure.Static.EasyUkrApplication.showToast;
 
 /**
  * Created by MARKAN on 20.05.2017.
  */
-public class AutorizationServiceNew {
+//Авторизаційна система
+public class AuthorizationService {
     private final Activity context;
     public boolean isSuccessful = false;
-    Token token;
+    //Токен доступу до ресурсів
+    private Token token;
 
-    public AutorizationServiceNew(Activity context) {
+    public AuthorizationService(Activity context) {
         this.context = context;
     }
 
-
+    //Логін
     public void login(UserModel model, boolean update) {
         try {
-            HttpManager<Token> manager = new HttpManager<>(context, ConstURL.getLoginUrl());
-            manager.putFormBody(new ParameterPair<>("grant_type", "password"),
-                    new ParameterPair<>("username", model.getUsername()),
-                    new ParameterPair<>("password", model.getPassword()));
-            manager.putHeaders(new ParameterPair<>("Content-Type", WwwFormType),
-                    new ParameterPair<>("Accept", JsonType));
-            manager.execute(HttpManager.Method.POST, HttpManager.SynchronizationType.ASYNC);
+            OkHttp3Manager<Token> manager = new OkHttp3Manager<>(context, ConstURL.getLoginUrl());
+            manager.putFormBody(new Tuple<>("grant_type", "password"),
+                    new Tuple<>("username", model.getUsername()),
+                    new Tuple<>("password", model.getPassword()));
+            manager.putHeaders(new Tuple<>("Content-Type", WwwFormType),
+                    new Tuple<>("Accept", JsonType));
+            manager.execute(OkHttp3Manager.Method.POST, OkHttp3Manager.SynchronizationType.ASYNC);
             if (manager.isSuccessful()) {
                 token = manager.getAsObject(Token.class);
                 CurrentUser.getInstance().setToken(token);
@@ -58,6 +60,7 @@ public class AutorizationServiceNew {
         }
     }
 
+    //Реєстрація
     public void register(EditingModel model) {
         try {
             WebApiPost apiPost = new WebApiPost();
@@ -84,12 +87,13 @@ public class AutorizationServiceNew {
         }
     }
 
+    //Вихід із системи
     public void logout() {
         try {
-            HttpManager manager = new HttpManager(context, ConstURL.getLogOutUrl());
-            manager.putHeaders(new ParameterPair<>(Token.authorizationHeader, CurrentUser.getInstance().getToken().getToken()));
+            OkHttp3Manager manager = new OkHttp3Manager(context, ConstURL.getLogOutUrl());
+            manager.putHeaders(new Tuple<>(Token.authorizationHeader, CurrentUser.getInstance().getToken().getToken()));
             manager.putRequestBody(null);
-            manager.execute(HttpManager.Method.POST, HttpManager.SynchronizationType.ASYNC);
+            manager.execute(OkHttp3Manager.Method.POST, OkHttp3Manager.SynchronizationType.ASYNC);
             if (manager.isSuccessful()) {
                 isSuccessful = true;
             }

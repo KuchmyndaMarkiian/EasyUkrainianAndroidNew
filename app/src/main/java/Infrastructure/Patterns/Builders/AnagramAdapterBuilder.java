@@ -15,13 +15,12 @@ import com.example.mark0.easyukrainian.R;
 /**
  * Created by MARKAN on 18.05.2017.
  */
+//Будівельник для генерації компонентів гри та подій на кнопках
 public class AnagramAdapterBuilder implements IBuilder {
     private IPresenter presenter;
-
     public AnagramAdapterBuilder(IPresenter presenter) {
         this.presenter = presenter;
     }
-
     @Override
     public void setParts() {
         final GamePresenter gamePresenter = (GamePresenter) presenter;
@@ -29,7 +28,6 @@ public class AnagramAdapterBuilder implements IBuilder {
         Activity descrPart = gamePresenter.getView().getCurrentContext();
         final TextView typedText = (TextView) descrPart.findViewById(R.id.typedWord);
         SparseArray<Character> characters = gamePresenter.getCollection();
-
         viewGame.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

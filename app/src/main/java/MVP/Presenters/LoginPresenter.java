@@ -1,7 +1,7 @@
 package MVP.Presenters;
 
 import Hardware.WiFiConnector;
-import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.RESTful.Autorization.AuthorizationService;
 import Infrastructure.Static.EasyUkrApplication;
 import MVP.Views.IView;
 import Models.AutorizationModels.Abstract.UserModel;
@@ -24,6 +24,7 @@ public class LoginPresenter extends AutorizationPresenter {
 
     public void login() {
         Dialog dialog = EasyUkrApplication.initDialog(view.getCurrentContext());
+        dialog.setCancelable(false);
         dialog.show();
         if (checkModel()) {
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
@@ -31,14 +32,9 @@ public class LoginPresenter extends AutorizationPresenter {
                 loginAsync.execute();
             } else
                 showToast(view.getCurrentContext(), "Wifi isn`t connected");
-        }
-
-        try {
             dialog.create();
-            dialog.dismiss();
-        } finally {
-
         }
+
     }
 
     @Override
@@ -55,12 +51,12 @@ public class LoginPresenter extends AutorizationPresenter {
     private class LoginAsync extends AsyncTask<Void, Void, Void> {
         private Activity contex;
         private UserModel model;
-        private AutorizationServiceNew service;
+        private AuthorizationService service;
 
         public LoginAsync(Activity context, UserModel model) {
             this.model = model;
             this.contex = context;
-            service = new AutorizationServiceNew(context);
+            service = new AuthorizationService(context);
         }
 
         @Override
@@ -75,12 +71,6 @@ public class LoginPresenter extends AutorizationPresenter {
         protected Void doInBackground(Void... voids) {
             try {
                 service.login(model, true);
-                contex.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showToast(contex.getBaseContext(), "Successful! You`re signed");
-                    }
-                });
             } catch (final Exception ex) {
                 contex.runOnUiThread(new Runnable() {
                     @Override

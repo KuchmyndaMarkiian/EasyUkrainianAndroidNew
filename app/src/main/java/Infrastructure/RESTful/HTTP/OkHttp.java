@@ -2,8 +2,8 @@ package Infrastructure.RESTful.HTTP;
 
 import Infrastructure.AccountSessions.CurrentUser;
 import Infrastructure.AccountSessions.Token;
-import Infrastructure.CustomTypes.ParameterPair;
 import Infrastructure.CustomTypes.TemplateMethods;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.RESTful.ConstURL;
 import Models.AutorizationModels.Abstract.UserModel;
 import android.annotation.SuppressLint;
@@ -64,7 +64,7 @@ public final class OkHttp {
         return execute(request).code() == 200;
     }
 
-    public static boolean requestPostWithImage(String url, String filepath, ParameterPair<String, String> parameter, String mediaType) throws IOException {
+    public static boolean requestPostWithImage(String url, String filepath, Tuple<String, String> parameter, String mediaType) throws IOException {
         MultipartBody.Builder builder = new MultipartBody.Builder();
         File file = new File(filepath);
         String[] splited = path.split("/");
@@ -82,16 +82,16 @@ public final class OkHttp {
         Request.Builder builder = new Request.Builder();
         builder.url(url);
         Map<String, String> params = TemplateMethods.formatParameters(
-                new ParameterPair<>("Content-Type", mediaType),
-                new ParameterPair<>("Accept", JsonType));
+                new Tuple<>("Content-Type", mediaType),
+                new Tuple<>("Accept", JsonType));
         for (Map.Entry<String, String> param : params.entrySet()) {
             builder.addHeader(param.getKey(), param.getValue());
         }
         FormBody.Builder bodyBuilder = new FormBody.Builder();
         params = TemplateMethods.formatParameters(
-                new ParameterPair<>("grant_type", "password"),
-                new ParameterPair<>("username", model.getUsername()),
-                new ParameterPair<>("password", model.getPassword()));
+                new Tuple<>("grant_type", "password"),
+                new Tuple<>("username", model.getUsername()),
+                new Tuple<>("password", model.getPassword()));
         for (Map.Entry<String, String> param : params.entrySet()) {
             bodyBuilder.add(param.getKey(), param.getValue());
         }

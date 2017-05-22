@@ -7,9 +7,9 @@ import java.util.*;
  */
 public final class TemplateMethods {
     @SafeVarargs
-    public static <F, S> Map<F, S> formatParameters(ParameterPair<F, S>... params) {
+    public static <F, S> Map<F, S> formatParameters(Tuple<F, S>... params) {
         Map<F, S> map = new HashMap<>();
-        for (ParameterPair<F, S> param : params) {
+        for (Tuple<F, S> param : params) {
             if (param.value != null)
                 map.put(param.key, param.value);
         }

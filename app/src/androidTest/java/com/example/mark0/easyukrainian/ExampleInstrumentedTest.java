@@ -1,6 +1,6 @@
 package com.example.mark0.easyukrainian;
 
-import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.RESTful.Autorization.AuthorizationService;
 import Models.AutorizationModels.Abstract.UserModel;
 import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class ExampleInstrumentedTest {
         model.setUsername("mark");
         model.setPassword("Mark95!");
 
-        AutorizationServiceNew serviceNew = new AutorizationServiceNew(null);
+        AuthorizationService serviceNew = new AuthorizationService(null);
         //serviceNew.login(model);
 
     }
@@ -27,7 +27,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void getImageTest() throws Exception {
         //byte[] img =
-        //  ServerDownloader.getFile(null, ConstURL.getFileUrl(), HttpManager.ParameterType.PARAMETER, "word", "6");
+        //  ServerDownloader.getFile(null, ConstURL.getFileUrl(), OkHttp3Manager.ParameterType.PARAMETER, "word", "6");
 
     }
 
@@ -44,7 +44,7 @@ public class ExampleInstrumentedTest {
         model.setUsername("markan");
         //model.setAvatar(new byte[]{0, 0, 34});
         String Message = "Cool";
-        AutorizationService service = new AutorizationService(null);
+        AuthorizationService service = new AuthorizationService(null);
         service.registerModel(model);
         if (!service.isSuccessfull())
             Message = service.getAutorizationMessage();

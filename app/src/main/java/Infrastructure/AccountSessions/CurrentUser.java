@@ -2,20 +2,20 @@ package Infrastructure.AccountSessions;
 
 
 import Hardware.WiFiConnector;
-import Infrastructure.CustomTypes.ParameterPair;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.MainOperations.JsonConverter;
 import Infrastructure.MainOperations.ServerDownloader;
 import Infrastructure.RESTful.ConstURL;
-import Infrastructure.RESTful.HTTP.HttpManager;
+import Infrastructure.RESTful.HTTP.OkHttp3Manager;
 import Models.SimpleUser;
 import android.app.Activity;
 import android.content.Context;
 
 import java.io.Serializable;
 
-import static Infrastructure.RESTful.HTTP.HttpManager.Method.GET;
-import static Infrastructure.RESTful.HTTP.HttpManager.Method.POST;
-import static Infrastructure.RESTful.HTTP.HttpManager.SynchronizationType.ASYNC;
+import static Infrastructure.RESTful.HTTP.OkHttp3Manager.Method.GET;
+import static Infrastructure.RESTful.HTTP.OkHttp3Manager.Method.POST;
+import static Infrastructure.RESTful.HTTP.OkHttp3Manager.SynchronizationType.ASYNC;
 import static Infrastructure.Static.EasyUkrApplication.showToast;
 
 /**
@@ -40,7 +40,7 @@ public class CurrentUser extends User implements Serializable {
                 SimpleUser tmp = getInfoFromServer(context);
                 user.Copy(tmp);
                 user.avatar = ServerDownloader.getFile(context, getInstance().getToken().getToken(),
-                        ConstURL.getAvatarUrl(), HttpManager.ParameterType.HEADER, null, null);
+                        ConstURL.getAvatarUrl(), OkHttp3Manager.ParameterType.HEADER, null, null);
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -53,8 +53,8 @@ public class CurrentUser extends User implements Serializable {
         try {
             WiFiConnector connector = new WiFiConnector(context.getBaseContext());
             if (connector.isConnected()) {
-                HttpManager manager = new HttpManager(context, ConstURL.getUpdateUserInfo());
-                manager.putHeaders(new ParameterPair<>(Token.authorizationHeader, CurrentUser.getInstance().getToken().getToken()));
+                OkHttp3Manager manager = new OkHttp3Manager(context, ConstURL.getUpdateUserInfo());
+                manager.putHeaders(new Tuple<>(Token.authorizationHeader, CurrentUser.getInstance().getToken().getToken()));
                 manager.putRequestBody(JsonConverter.serialize(CurrentUser.getInstance().parseToSimpleUser()));
                 manager.execute(POST, ASYNC);
                 if (manager.isSuccessful()) {
@@ -72,8 +72,8 @@ public class CurrentUser extends User implements Serializable {
     }
 
     private static SimpleUser getInfoFromServer(Context context) {
-        HttpManager<SimpleUser> manager = new HttpManager<>(context, ConstURL.getUserUrl());
-        manager.putHeaders(new ParameterPair<>(Token.authorizationHeader, getInstance().token.getToken()));
+        OkHttp3Manager<SimpleUser> manager = new OkHttp3Manager<>(context, ConstURL.getUserUrl());
+        manager.putHeaders(new Tuple<>(Token.authorizationHeader, getInstance().token.getToken()));
         manager.execute(GET, ASYNC);
         if (manager.isSuccessful()) {
             return manager.getAsObject(SimpleUser.class);

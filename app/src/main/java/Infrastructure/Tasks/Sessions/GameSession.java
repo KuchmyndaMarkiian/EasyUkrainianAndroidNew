@@ -12,18 +12,18 @@ import java.util.Random;
 /**
  * Created by MARKAN on 18.05.2017.
  */
+//Гральна сесія
 public class GameSession implements ITaskSession, Serializable {
-
     private ArrayList<String> words;
     private ArrayList<Character> letters;
     private int checked = 0;
     private int wrong = 0;
-
     public GameSession(Activity activity) {
         words = new ArrayList<>();
         letters = new ArrayList<>();
     }
 
+    //Перевірка комбінації слів
     public boolean checkAnagram(String word) {
         if (words.contains(word)) {
             checked++;
@@ -32,16 +32,15 @@ public class GameSession implements ITaskSession, Serializable {
         wrong++;
         return false;
     }
-
     public boolean isFinished() {
         return checked == words.size();
     }
 
+    //Повернення результату гри
     @Override
     public int getResult() {
         return getLettersLength() * (checked - wrong / 2);
     }
-
     @Override
     public String getResultMessage() {
         return "Your result: "
@@ -50,6 +49,7 @@ public class GameSession implements ITaskSession, Serializable {
                 .concat(String.valueOf(getLettersLength() * checked));
     }
 
+    //Генерування даних для гри
     @Override
     public void generate(Activity activity) {
         Deserializer deserializer = new Deserializer<Word>(EasyUkrFiles.Type.WORD, activity.getExternalFilesDir(null));
@@ -57,8 +57,7 @@ public class GameSession implements ITaskSession, Serializable {
         for (Word word : tmp) {
             words.add(word.getWord());
         }
-
-        //generating algorithm
+        //Алгоритм генерації грального поля
         int length = 6;
         Random random = new Random(System.currentTimeMillis());
         int commonLength = length * length;
@@ -84,6 +83,7 @@ public class GameSession implements ITaskSession, Serializable {
         shakeLetters();
     }
 
+    //Шейкерне перемішування елементів колекції
     private void shakeLetters() {
         ArrayList<Character> result = new ArrayList<>();
         Random random = new Random(System.currentTimeMillis());
@@ -100,6 +100,7 @@ public class GameSession implements ITaskSession, Serializable {
         letters = result;
     }
 
+    //Загальна довжина символів грального поля
     private int getLettersLength() {
         int res = 0;
         for (String str : words) {
@@ -107,12 +108,10 @@ public class GameSession implements ITaskSession, Serializable {
         }
         return res;
     }
-
     @Override
     public ArrayList<Character> getGenerategData() {
         return letters;
     }
-
     @Override
     public SessionType getSessionType() {
         return SessionType.GAME;

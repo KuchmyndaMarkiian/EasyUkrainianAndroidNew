@@ -48,10 +48,13 @@ public class WordAdapter extends CommonAdapter {
             layout.addView(img);
             TextView t1 = new TextView(context);
             TextView t2 = new TextView(context);
+            TextView t3 = new TextView(context);
             t1.setText(element.getWord());
-            t2.setText(element.getTranslate());
+            t2.setText(element.getTranscription());
+            t3.setText(element.getTranslate());
             layout.addView(t1);
             layout.addView(t2);
+            layout.addView(t3);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 layout.setBackground(context.getDrawable(R.drawable.cornercard));
             }

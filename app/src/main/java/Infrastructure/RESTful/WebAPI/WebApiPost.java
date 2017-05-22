@@ -1,7 +1,7 @@
 package Infrastructure.RESTful.WebAPI;
 
 import Infrastructure.AccountSessions.CurrentUser;
-import Infrastructure.CustomTypes.ParameterPair;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.RESTful.ConstURL;
 import Infrastructure.RESTful.HTTP.OkHttp;
 import Models.AutorizationModels.Abstract.EditingModel;
@@ -23,7 +23,7 @@ public class WebApiPost {
         return requestPost(ConstURL.getRegisterUrl(), (new Gson()).toJson(model), OkHttp.JsonType, null)
                 && requestToken(ConstURL.getLoginUrl(), model, WwwFormType)
                 && requestPostWithImage(ConstURL.getUploadUrl(), path,
-                new ParameterPair<>("authorization", CurrentUser.getInstance().getToken().getToken())
+                new Tuple<>("authorization", CurrentUser.getInstance().getToken().getToken())
                 , Multipart);
     }
 }

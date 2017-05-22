@@ -5,7 +5,7 @@ import Infrastructure.Interfaces.IConfirmedData;
 import Infrastructure.Interfaces.IModelChecking;
 import Infrastructure.Interfaces.IUserForm;
 import Infrastructure.Interfaces.IValidating;
-import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.RESTful.Autorization.AuthorizationService;
 import Infrastructure.Static.EasyUkrApplication;
 import MVP.Views.IView;
 import Models.AutorizationModels.Abstract.EditingModel;
@@ -67,6 +67,7 @@ public class RegisterPresenter extends AutorizationPresenter implements IRedirec
 
     public void register() {
         Dialog dialog = EasyUkrApplication.initDialog(view.getCurrentContext());
+        dialog.setCancelable(false);
         dialog.show();
         if (checkModel()) {
             if ((new WiFiConnector(view.getCurrentContext().getBaseContext()).isConnected())) {
@@ -136,12 +137,12 @@ public class RegisterPresenter extends AutorizationPresenter implements IRedirec
     private class RegisterAsync extends AsyncTask<Void, Void, Void> {
         private Activity contex;
         private EditingModel model;
-        private AutorizationServiceNew service;
+        private AuthorizationService service;
 
         public RegisterAsync(Activity context, EditingModel model) {
             this.model = model;
             this.contex = context;
-            service = new AutorizationServiceNew(context);
+            service = new AuthorizationService(context);
         }
 
         @Override

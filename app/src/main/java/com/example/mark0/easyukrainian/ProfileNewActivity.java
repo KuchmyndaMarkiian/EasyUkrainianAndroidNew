@@ -1,7 +1,7 @@
 package com.example.mark0.easyukrainian;
 
 import Hardware.Storage.EasyUkrFiles;
-import Infrastructure.RESTful.Autorization.AutorizationServiceNew;
+import Infrastructure.RESTful.Autorization.AuthorizationService;
 import Infrastructure.Tasks.Sessions.ITaskSession;
 import MVP.Presenters.IPresenter;
 import MVP.Presenters.ProfilePresenter;
@@ -109,7 +109,7 @@ public class ProfileNewActivity extends AppCompatActivity
                 break;
             }
             case R.id.logOut: {
-                AutorizationServiceNew service = new AutorizationServiceNew(this);
+                AuthorizationService service = new AuthorizationService(this);
                 service.logout();
 
                 if (service.isSuccessful) {

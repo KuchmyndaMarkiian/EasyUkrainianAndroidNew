@@ -1,7 +1,7 @@
 package MVP.Presenters;
 
-import Infrastructure.CustomTypes.ParameterPair;
 import Infrastructure.CustomTypes.TemplateMethods;
+import Infrastructure.CustomTypes.Tuple;
 import Infrastructure.Tasks.Sessions.TaskSession;
 import Infrastructure.Tasks.Tasks.Task;
 import MVP.Views.IView;
@@ -81,14 +81,14 @@ public abstract class TaskPresenter implements IPresenter, IRedirectablePresente
         currentIndex++;
         if (currentIndex >= currentSession.getGenerategData().size()) {
             redirectView(ProfileNewActivity.class, TemplateMethods.formatParameters(
-                    new ParameterPair<String, Serializable>("session", currentSession)
+                    new Tuple<String, Serializable>("session", currentSession)
             ));
         } else {
             currentOption = null;
             redirectView(TaskActivity.class, TemplateMethods.formatParameters(
-                    new ParameterPair<String, Serializable>("session", currentSession),
-                    new ParameterPair<String, Serializable>("type", currentSession.getSessionType()),
-                    new ParameterPair<String, Serializable>("index", currentIndex++)
+                    new Tuple<String, Serializable>("session", currentSession),
+                    new Tuple<String, Serializable>("type", currentSession.getSessionType()),
+                    new Tuple<String, Serializable>("index", currentIndex++)
             ));
             activity.finish();
         }
